@@ -1,0 +1,1528 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Data Restructure | DataPonderings</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Data Restructure" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="The practice and procedure of achieving Tidy Data" />
+<meta property="og:description" content="The practice and procedure of achieving Tidy Data" />
+<link rel="canonical" href="https://ajakaiye33.github.io/DataMusings/fastpages/jupyter/2020/12/07/tidy.html" />
+<meta property="og:url" content="https://ajakaiye33.github.io/DataMusings/fastpages/jupyter/2020/12/07/tidy.html" />
+<meta property="og:site_name" content="DataPonderings" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-12-07T00:00:00-06:00" />
+<script type="application/ld+json">
+{"description":"The practice and procedure of achieving Tidy Data","url":"https://ajakaiye33.github.io/DataMusings/fastpages/jupyter/2020/12/07/tidy.html","@type":"BlogPosting","headline":"Data Restructure","dateModified":"2020-12-07T00:00:00-06:00","datePublished":"2020-12-07T00:00:00-06:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://ajakaiye33.github.io/DataMusings/fastpages/jupyter/2020/12/07/tidy.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/DataMusings/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://ajakaiye33.github.io/DataMusings/feed.xml" title="DataPonderings" /><link rel="shortcut icon" type="image/x-icon" href="/DataMusings/images/favicon.ico"><link href="https://cdn.jsdelivr.net/npm/@primer/css/dist/primer.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"> </script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement( document.body, {
+        delimiters: [
+            {left: "$$", right: "$$", display: true},
+            {left: "[%", right: "%]", display: true},
+            {left: "$", right: "$", display: false}
+        ]}
+        );
+    });
+    </script>
+
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/DataMusings/">DataPonderings</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/DataMusings/about/">About Me</a><a class="page-link" href="/DataMusings/search/">Search</a><a class="page-link" href="/DataMusings/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Data Restructure</h1><p class="page-description">The practice and procedure of achieving Tidy Data</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-12-07T00:00:00-06:00" itemprop="datePublished">
+        Dec 7, 2020
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      11 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/DataMusings/categories/#fastpages">fastpages</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/DataMusings/categories/#jupyter">jupyter</a>
+        
+      
+      </p>
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/ajakaiye33/DataMusings/tree/master/_notebooks/2020-12-07-tidy.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/DataMusings/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/ajakaiye33/DataMusings/master?filepath=_notebooks%2F2020-12-07-tidy.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/DataMusings/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/ajakaiye33/DataMusings/blob/master/_notebooks/2020-12-07-tidy.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/DataMusings/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2020-12-07-tidy.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Introduction">Introduction<a class="anchor-link" href="#Introduction"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Some couple of weeks ago, I can remember I drew your attention to the bitter truth about Data Science. In that piece, I posited that beyond the 'sexiness' and other euphemisms wrapped around the practice of Data Science, Data Science is Data wrangling and cleaning! How else can one describe a profession where over 90 per cent of its activities revolves around data cleaning and wrangling?</p>
+<p>I'm happy my mentors drilled this concept of Data Science into my subconscious mind at the very beginning of my encounter with Data Science. The view that Data Cleaning and wrangling form a more significant part of Data Science practice has not only humbled me but has helped me to develop a growth mindset in my quest to learn and practice Data Science. To this end, the majority of the data in the wild will need a significant amount of restructuring before commencing a more detailed analysis.</p>
+<p>My attention this week is turned to the concept and practice of data restructuring or 'tidy data'. Tidy data is one topic; in my opinion, critical to building a solid foundation in Data Science. Data restructure as a procedure has grown in lips and bounds so much so that in data science and analysis parlance, thanks to <a href="&#39;http://vita.had.co.nz/papers/tidy-data.pdf&#39;">Hadley Wickham</a> is now popularly referred to as <strong>Tidy Data</strong></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="What-is-Tidy-Data?">What is Tidy Data?<a class="anchor-link" href="#What-is-Tidy-Data?"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The concept of Tidy Data will be best understood when demonstrated than theoretically explained. To this end, in the course of this piece, I will use examples from real-life data to make the topic more interactive and possibly hands-on.</p>
+<p>According to the father of Tidy Data, a dataset is  messy if it does not meet the following guidelines:</p>
+<ul>
+<li>Each variable from a column</li>
+<li>Each observation from a row</li>
+<li>Each type of observational unit forms a table</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Messy-or-Untidy-Data">Messy or Untidy Data<a class="anchor-link" href="#Messy-or-Untidy-Data"> </a></h3><p>Since the taste of the pudding is in the eating, we will display an example of messy data in the real-world.
+Our dataset, for this post, is the record of students in private and public schools performance in the West African Examination Council (WAEC) Examination from the year 2016 to 2018.
+This is how the data set look like when viewed with MS Excel:
+<img src="/DataMusings/images/copied_from_nb/my_icons/excel.png" alt="" /></p>
+<h3 id="Types-of-Messy-Data">Types of Messy Data<a class="anchor-link" href="#Types-of-Messy-Data"> </a></h3><p>The first step to resolving messy data is to recognize it when it exists. However, Hadley explicitly mentioned five of the most common types of dirty data:</p>
+<ul>
+<li>Columns names are values, not variables names</li>
+<li>Multiple variables are stored in column names</li>
+<li>Variables are stored in both rows and columns</li>
+<li>Multiple types of observational units are stored in the same table</li>
+<li>A single observational unit is stored in multiple tables</li>
+</ul>
+<h3 id="Tidy-Data-Procedure">Tidy Data Procedure<a class="anchor-link" href="#Tidy-Data-Procedure"> </a></h3><p>Tidying data does not typically involve changing the value of a dataset, filling in missing values or doing any analysis. Tidying data consist of changing the <strong>shape or structure of the data to meet the tidy data principle</strong></p>
+<h4 id="Read-Data-into-Pandas">Read Data into Pandas<a class="anchor-link" href="#Read-Data-into-Pandas"> </a></h4><p>As customary, Pandas is the go-to tool for cleaning, restructuring, wrangling and visualizing data. Our goal as far as this dataset is concerned is to get for each year the private and public school performance of both sex and their respective states. Without doubt, to get our dataset from its present structure to the structure indicated above, we will perform some restructuring and tidying. Thus from the current dataset, we would extract the following variable/columns and variable values.</p>
+<ul>
+<li>States</li>
+<li>Year</li>
+<li>Sex</li>
+<li>Five_credit_and_above - Percentage of student that earned five credit and above </li>
+</ul>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span><span class="p">;</span><span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="sa">r</span><span class="s2">&quot;/Users/user/anaconda3/envs/wrangling_data/lib/python3.7/site-packages&quot;</span><span class="p">])</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">messy_data_private_2016</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;./The-Data-Wrangling-Workshop/Chapter09/datasets/waec_2016_2018.xlsx&#39;</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;private 2016&#39;</span><span class="p">)</span>
+<span class="n">messy_data_public_2016</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;./The-Data-Wrangling-Workshop/Chapter09/datasets/waec_2016_2018.xlsx&#39;</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;Public 2016&#39;</span><span class="p">)</span>
+<span class="n">messy_data_private_2017</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;./The-Data-Wrangling-Workshop/Chapter09/datasets/waec_2016_2018.xlsx&#39;</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;Private 2017&#39;</span><span class="p">)</span>
+<span class="n">messy_data_public_2017</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;./The-Data-Wrangling-Workshop/Chapter09/datasets/waec_2016_2018.xlsx&#39;</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;public 2017&#39;</span><span class="p">)</span>
+<span class="n">messy_data_private_2018</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;./The-Data-Wrangling-Workshop/Chapter09/datasets/waec_2016_2018.xlsx&#39;</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;Private 2018&#39;</span><span class="p">)</span>
+<span class="n">messy_data_public_2018</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;./The-Data-Wrangling-Workshop/Chapter09/datasets/waec_2016_2018.xlsx&#39;</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;Public 2018&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">messy_data_private_2016</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>WEST AFRICAN EXAMINATIONS COUNCIL</th>
+      <th>Unnamed: 1</th>
+      <th>Unnamed: 2</th>
+      <th>Unnamed: 3</th>
+      <th>Unnamed: 4</th>
+      <th>Unnamed: 5</th>
+      <th>Unnamed: 6</th>
+      <th>Unnamed: 7</th>
+      <th>Unnamed: 8</th>
+      <th>Unnamed: 9</th>
+      <th>Unnamed: 10</th>
+      <th>Unnamed: 11</th>
+      <th>Unnamed: 12</th>
+      <th>Unnamed: 13</th>
+      <th>Unnamed: 14</th>
+      <th>Unnamed: 15</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>RESULT STATISTICS FOR 5 CREDITS IN ENGLISH, MA...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>WASSCE PRIVATE CANDIDATES EXAMINATION 2016</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>STATE</td>
+      <td>TOTAL NUMBER SAT</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>5 CREDITS AND ABOVE INCLUDING ENGLISH LANGUAGE</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>5 CREDITS AND ABOVE INCLUDING MATHEMATICS</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>5 CREDITS &amp; ABOVE INCLUDING MATHEMATICS &amp; ENGL...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>% OF 5 CREDITS AND ABOVE</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>NaN</td>
+      <td>MALE</td>
+      <td>FEMALE</td>
+      <td>TOTAL</td>
+      <td>MALE</td>
+      <td>FEMALE</td>
+      <td>TOTAL</td>
+      <td>MALE</td>
+      <td>FEMALE</td>
+      <td>TOTAL</td>
+      <td>MALE</td>
+      <td>FEMALE</td>
+      <td>TOTAL</td>
+      <td>MALE</td>
+      <td>FEMALE</td>
+      <td>TOTAL</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>ABIA</td>
+      <td>309</td>
+      <td>276</td>
+      <td>585</td>
+      <td>65</td>
+      <td>59</td>
+      <td>124</td>
+      <td>39</td>
+      <td>27</td>
+      <td>66</td>
+      <td>35</td>
+      <td>25</td>
+      <td>60</td>
+      <td>11.3269</td>
+      <td>9.05797</td>
+      <td>10.2564</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">messy_data_public_2016</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>WEST AFRICAN EXAMINATIONS COUNCIL</th>
+      <th>Unnamed: 1</th>
+      <th>Unnamed: 2</th>
+      <th>Unnamed: 3</th>
+      <th>Unnamed: 4</th>
+      <th>Unnamed: 5</th>
+      <th>Unnamed: 6</th>
+      <th>Unnamed: 7</th>
+      <th>Unnamed: 8</th>
+      <th>Unnamed: 9</th>
+      <th>Unnamed: 10</th>
+      <th>Unnamed: 11</th>
+      <th>Unnamed: 12</th>
+      <th>Unnamed: 13</th>
+      <th>Unnamed: 14</th>
+      <th>Unnamed: 15</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>RESULT STATISTICS FOR 5 CREDITS IN ENGLISH, MA...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>WASSCE CANDIDATES EXAMINATION 2016</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>STATE</td>
+      <td>TOTAL NUMBER SAT</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>5 CREDITS AND ABOVE INCLUDING ENGLISH LANGUAGE</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>5 CREDITS AND ABOVE INCLUDING MATHEMATICS</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>5 CREDITS &amp; ABOVE INCLUDING MATHEMATICS &amp; ENGL...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>% OF 5 CREDITS &amp; ABOVE INCLUDING MATHEMATICS &amp;...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>NaN</td>
+      <td>MALE</td>
+      <td>FEMALE</td>
+      <td>TOTAL</td>
+      <td>MALE</td>
+      <td>FEMALE</td>
+      <td>TOTAL</td>
+      <td>MALE</td>
+      <td>FEMALE</td>
+      <td>TOTAL</td>
+      <td>MALE</td>
+      <td>FEMALE</td>
+      <td>TOTAL</td>
+      <td>MALE</td>
+      <td>FEMALE</td>
+      <td>TOTAL</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>ABIA</td>
+      <td>24322</td>
+      <td>27405</td>
+      <td>51727</td>
+      <td>20403</td>
+      <td>23564</td>
+      <td>43967</td>
+      <td>18485</td>
+      <td>20688</td>
+      <td>39173</td>
+      <td>17264</td>
+      <td>19526</td>
+      <td>36790</td>
+      <td>70.981</td>
+      <td>71.2498</td>
+      <td>71.1234</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">messy_data_private_2017</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>WEST AFRICAN EXAMINATIONS COUNCIL</th>
+      <th>Unnamed: 1</th>
+      <th>Unnamed: 2</th>
+      <th>Unnamed: 3</th>
+      <th>Unnamed: 4</th>
+      <th>Unnamed: 5</th>
+      <th>Unnamed: 6</th>
+      <th>Unnamed: 7</th>
+      <th>Unnamed: 8</th>
+      <th>Unnamed: 9</th>
+      <th>Unnamed: 10</th>
+      <th>Unnamed: 11</th>
+      <th>Unnamed: 12</th>
+      <th>Unnamed: 13</th>
+      <th>Unnamed: 14</th>
+      <th>Unnamed: 15</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>RESULT STATISTICS FOR 5 CREDITS IN ENGLISH ,M...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>WASSCE PRIVATE CANDIDATES EXAMINATION 2017</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>STATE</td>
+      <td>TOTAL NUMBER SAT</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>5 CREDITS AND ABOVE INCLUDING ENGLISH LANGUAGE</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>5 CREDITS AND ABOVE INCLUDING MATHEMATICS</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>5 CREDITS &amp; ABOVE INCLUDING MATHEMATICS &amp; ENGL...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>% OF 5 CREDITS &amp; ABOVE INCLUDING MATHEMATICS &amp;...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>NaN</td>
+      <td>MALE</td>
+      <td>FEMALE</td>
+      <td>TOTAL</td>
+      <td>MALE</td>
+      <td>FEMALE</td>
+      <td>TOTAL</td>
+      <td>MALE</td>
+      <td>FEMALE</td>
+      <td>TOTAL</td>
+      <td>MALE</td>
+      <td>FEMALE</td>
+      <td>TOTAL</td>
+      <td>MALE</td>
+      <td>FEMALE</td>
+      <td>TOTAL</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>ABIA</td>
+      <td>331</td>
+      <td>279</td>
+      <td>610</td>
+      <td>128</td>
+      <td>116</td>
+      <td>244</td>
+      <td>106</td>
+      <td>105</td>
+      <td>211</td>
+      <td>96</td>
+      <td>99</td>
+      <td>195</td>
+      <td>29.003</td>
+      <td>35.4839</td>
+      <td>31.9672</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">messy_data_public_2017</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>WEST AFRICAN EXAMINATIONS COUNCIL</th>
+      <th>Unnamed: 1</th>
+      <th>Unnamed: 2</th>
+      <th>Unnamed: 3</th>
+      <th>Unnamed: 4</th>
+      <th>Unnamed: 5</th>
+      <th>Unnamed: 6</th>
+      <th>Unnamed: 7</th>
+      <th>Unnamed: 8</th>
+      <th>Unnamed: 9</th>
+      <th>Unnamed: 10</th>
+      <th>Unnamed: 11</th>
+      <th>Unnamed: 12</th>
+      <th>Unnamed: 13</th>
+      <th>Unnamed: 14</th>
+      <th>Unnamed: 15</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>RESULT STATISTICS FOR 5 CREDITS IN ENGLISH ,MA...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>WASSCE CANDIDATES EXAMINATION 2017</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>STATE</td>
+      <td>TOTAL NUMBER SAT</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>5 CREDITS AND ABOVE INCLUDING ENGLISH LANGUAGE</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>5 CREDITS AND ABOVE INCLUDING MATHEMATICS</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>5 CREDITS &amp; ABOVE INCLUDING MATHEMATICS &amp; ENGL...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>% OF 5 CREDITS &amp; ABOVE INCLUDING MATHEMATICS &amp;...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>NaN</td>
+      <td>MALE</td>
+      <td>FEMALE</td>
+      <td>TOTAL</td>
+      <td>MALE</td>
+      <td>FEMALE</td>
+      <td>TOTAL</td>
+      <td>MALE</td>
+      <td>FEMALE</td>
+      <td>TOTAL</td>
+      <td>MALE</td>
+      <td>FEMALE</td>
+      <td>TOTAL</td>
+      <td>MALE</td>
+      <td>FEMALE</td>
+      <td>TOTAL</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>ABIA</td>
+      <td>23649</td>
+      <td>26023</td>
+      <td>49672</td>
+      <td>19317</td>
+      <td>21712</td>
+      <td>41029</td>
+      <td>20727</td>
+      <td>22931</td>
+      <td>43658</td>
+      <td>17928</td>
+      <td>20084</td>
+      <td>38012</td>
+      <td>75.8087</td>
+      <td>77.1779</td>
+      <td>76.526</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">messy_data_private_2018</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>WEST AFRICAN EXAMINATIONS COUNCIL</th>
+      <th>Unnamed: 1</th>
+      <th>Unnamed: 2</th>
+      <th>Unnamed: 3</th>
+      <th>Unnamed: 4</th>
+      <th>Unnamed: 5</th>
+      <th>Unnamed: 6</th>
+      <th>Unnamed: 7</th>
+      <th>Unnamed: 8</th>
+      <th>Unnamed: 9</th>
+      <th>...</th>
+      <th>Unnamed: 16374</th>
+      <th>Unnamed: 16375</th>
+      <th>Unnamed: 16376</th>
+      <th>Unnamed: 16377</th>
+      <th>Unnamed: 16378</th>
+      <th>Unnamed: 16379</th>
+      <th>Unnamed: 16380</th>
+      <th>Unnamed: 16381</th>
+      <th>Unnamed: 16382</th>
+      <th>Unnamed: 16383</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>RESULT STATISTICS FOR 5 CREDITS IN ENGLISH ,M...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>WASSCE PRIVATE CANDIDATES EXAMINATION 2018</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>STATE</td>
+      <td>TOTAL NUMBER SAT</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>5 CREDITS AND ABOVE INCLUDING ENGLISH LANGUAGE</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>5 CREDITS AND ABOVE INCLUDING MATHEMATICS</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>NaN</td>
+      <td>MALE</td>
+      <td>FEMALE</td>
+      <td>TOTAL</td>
+      <td>MALE</td>
+      <td>FEMALE</td>
+      <td>TOTAL</td>
+      <td>MALE</td>
+      <td>FEMALE</td>
+      <td>TOTAL</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>ABIA</td>
+      <td>308</td>
+      <td>291</td>
+      <td>599</td>
+      <td>176</td>
+      <td>176</td>
+      <td>352</td>
+      <td>172</td>
+      <td>170</td>
+      <td>342</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 16384 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">messy_data_public_2018</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>WEST AFRICAN EXAMINATIONS COUNCIL</th>
+      <th>Unnamed: 1</th>
+      <th>Unnamed: 2</th>
+      <th>Unnamed: 3</th>
+      <th>Unnamed: 4</th>
+      <th>Unnamed: 5</th>
+      <th>Unnamed: 6</th>
+      <th>Unnamed: 7</th>
+      <th>Unnamed: 8</th>
+      <th>Unnamed: 9</th>
+      <th>Unnamed: 10</th>
+      <th>Unnamed: 11</th>
+      <th>Unnamed: 12</th>
+      <th>Unnamed: 13</th>
+      <th>Unnamed: 14</th>
+      <th>Unnamed: 15</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>RESULT STATISTICS FOR 5 CREDITS IN ENGLISH ,M...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>WASSCE  CANDIDATES EXAMINATION 2018</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>STATE</td>
+      <td>TOTAL NUMBER SAT</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>5 CREDITS AND ABOVE INCLUDING ENGLISH LANGUAGE</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>5 CREDITS AND ABOVE INCLUDING MATHEMATICS</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>5 CREDITS &amp; ABOVE INCLUDING MATHEMATICS &amp; ENGL...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>% of 5 CREDITS AND ABOVE INCLUDING MATHEMATICS...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>NaN</td>
+      <td>MALE</td>
+      <td>FEMALE</td>
+      <td>TOTAL</td>
+      <td>MALE</td>
+      <td>FEMALE</td>
+      <td>TOTAL</td>
+      <td>MALE</td>
+      <td>FEMALE</td>
+      <td>TOTAL</td>
+      <td>MALE</td>
+      <td>FEMALE</td>
+      <td>TOTAL</td>
+      <td>MALE</td>
+      <td>FEMALE</td>
+      <td>TOTAL</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>ABIA</td>
+      <td>22502</td>
+      <td>24966</td>
+      <td>47468</td>
+      <td>19711</td>
+      <td>22056</td>
+      <td>41767</td>
+      <td>20239</td>
+      <td>22426</td>
+      <td>42665</td>
+      <td>18484</td>
+      <td>20572</td>
+      <td>39056</td>
+      <td>82.1438</td>
+      <td>82.4001</td>
+      <td>82.2786</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Remove/skip-Useless-Values-and-Variables">Remove/skip Useless Values and Variables<a class="anchor-link" href="#Remove/skip-Useless-Values-and-Variables"> </a></h4><p>From the above MS Excel display of the data we can see that we need to skip some rows of values that are not useful for our desired data structure</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">skip_rows_private_2016</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;./The-Data-Wrangling-Workshop/Chapter09/datasets/waec_2016_2018.xlsx&#39;</span><span class="p">,</span>\
+                                       <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;private 2016&#39;</span><span class="p">,</span><span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">skiprows</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">rename_col</span> <span class="o">=</span> <span class="n">skip_rows_private_2016</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">39</span><span class="p">,[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span><span class="mi">14</span><span class="p">]]</span>
+<span class="n">rename_col</span> <span class="o">=</span> <span class="n">rename_col</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="s1">&#39;States&#39;</span><span class="p">,</span> <span class="mi">13</span><span class="p">:</span><span class="s1">&#39;Male&#39;</span><span class="p">,</span><span class="mi">14</span><span class="p">:</span><span class="s1">&#39;Female&#39;</span><span class="p">})</span>
+<span class="n">rename_col</span><span class="p">[</span><span class="s1">&#39;School_type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;private&#39;</span>
+<span class="n">rename_col</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2016</span>
+
+
+<span class="c1">#public 2016</span>
+<span class="n">skip_rows_public_2016</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;./The-Data-Wrangling-Workshop/Chapter09/datasets/waec_2016_2018.xlsx&#39;</span><span class="p">,</span>\
+                                      <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;Public 2016&#39;</span><span class="p">,</span><span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">rename_col_2016_b</span> <span class="o">=</span> <span class="n">skip_rows_public_2016</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">39</span><span class="p">,[</span><span class="mi">0</span><span class="p">,</span><span class="mi">13</span><span class="p">,</span><span class="mi">14</span><span class="p">]]</span>
+<span class="n">rename_col_2016_b</span> <span class="o">=</span> <span class="n">rename_col_2016_b</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="s1">&#39;States&#39;</span><span class="p">,</span> <span class="mi">13</span><span class="p">:</span><span class="s1">&#39;Male&#39;</span><span class="p">,</span> <span class="mi">14</span><span class="p">:</span><span class="s1">&#39;Female&#39;</span><span class="p">})</span>
+<span class="n">rename_col_2016_b</span><span class="p">[</span><span class="s1">&#39;School_type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;public&#39;</span>
+<span class="n">rename_col_2016_b</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2016</span>
+
+
+
+<span class="c1">#private 2017</span>
+<span class="n">skip_rows_private_2017</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;./The-Data-Wrangling-Workshop/Chapter09/datasets/waec_2016_2018.xlsx&#39;</span><span class="p">,</span>\
+                                       <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;Private 2017&#39;</span><span class="p">,</span><span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">skiprows</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">rename_col_2017</span> <span class="o">=</span> <span class="n">skip_rows_private_2017</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">39</span><span class="p">,[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span><span class="mi">14</span><span class="p">]]</span>
+<span class="n">rename_col_2017</span> <span class="o">=</span> <span class="n">rename_col_2017</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="s1">&#39;States&#39;</span><span class="p">,</span> <span class="mi">13</span><span class="p">:</span><span class="s1">&#39;Male&#39;</span><span class="p">,</span><span class="mi">14</span><span class="p">:</span><span class="s1">&#39;Female&#39;</span><span class="p">})</span>
+<span class="n">rename_col_2017</span><span class="p">[</span><span class="s1">&#39;School_type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;private&#39;</span>
+<span class="n">rename_col_2017</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2017</span>
+
+
+<span class="c1">#public 2017</span>
+<span class="n">skip_rows_public_2017</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;./The-Data-Wrangling-Workshop/Chapter09/datasets/waec_2016_2018.xlsx&#39;</span><span class="p">,</span>\
+                                      <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;public 2017&#39;</span><span class="p">,</span><span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">rename_col_2017_public</span> <span class="o">=</span> <span class="n">skip_rows_public_2017</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">39</span><span class="p">,[</span><span class="mi">0</span><span class="p">,</span><span class="mi">13</span><span class="p">,</span><span class="mi">14</span><span class="p">]]</span>
+<span class="n">rename_col_2017_public</span> <span class="o">=</span> <span class="n">rename_col_2017_public</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="s1">&#39;States&#39;</span><span class="p">,</span> <span class="mi">13</span><span class="p">:</span><span class="s1">&#39;Male&#39;</span><span class="p">,</span> <span class="mi">14</span><span class="p">:</span><span class="s1">&#39;Female&#39;</span><span class="p">})</span>
+<span class="n">rename_col_2017_public</span><span class="p">[</span><span class="s1">&#39;School_type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;public&#39;</span>
+<span class="n">rename_col_2017_public</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2017</span>
+
+
+
+<span class="c1">#private 2018</span>
+<span class="n">skip_rows_private_2018</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;./The-Data-Wrangling-Workshop/Chapter09/datasets/waec_2016_2018.xlsx&#39;</span><span class="p">,</span>\
+                                       <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;Private 2018&#39;</span><span class="p">,</span><span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">skiprows</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">rename_col_2018_private</span> <span class="o">=</span> <span class="n">skip_rows_private_2018</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">39</span><span class="p">,[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span><span class="mi">14</span><span class="p">]]</span>
+<span class="n">rename_col_2018_private</span> <span class="o">=</span> <span class="n">rename_col_2018_private</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="s1">&#39;States&#39;</span><span class="p">,</span> <span class="mi">13</span><span class="p">:</span><span class="s1">&#39;Male&#39;</span><span class="p">,</span><span class="mi">14</span><span class="p">:</span><span class="s1">&#39;Female&#39;</span><span class="p">})</span>
+<span class="n">rename_col_2018_private</span><span class="p">[</span><span class="s1">&#39;School_type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;private&#39;</span>
+<span class="n">rename_col_2018_private</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2018</span>
+
+
+<span class="c1">#public 2018</span>
+<span class="n">skip_rows_public_2018</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;./The-Data-Wrangling-Workshop/Chapter09/datasets/waec_2016_2018.xlsx&#39;</span><span class="p">,</span>\
+                                      <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;Public 2018&#39;</span><span class="p">,</span><span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">rename_col_2018_public</span> <span class="o">=</span> <span class="n">skip_rows_public_2018</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">39</span><span class="p">,[</span><span class="mi">0</span><span class="p">,</span><span class="mi">13</span><span class="p">,</span><span class="mi">14</span><span class="p">]]</span>
+<span class="n">rename_col_2018_public</span> <span class="o">=</span> <span class="n">rename_col_2018_public</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="s1">&#39;States&#39;</span><span class="p">,</span> <span class="mi">13</span><span class="p">:</span><span class="s1">&#39;Male&#39;</span><span class="p">,</span> <span class="mi">14</span><span class="p">:</span><span class="s1">&#39;Female&#39;</span><span class="p">})</span>
+<span class="n">rename_col_2018_public</span><span class="p">[</span><span class="s1">&#39;School_type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;public&#39;</span>
+<span class="n">rename_col_2018_public</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2018</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Transform-to-Tidy-Data">Transform to Tidy Data<a class="anchor-link" href="#Transform-to-Tidy-Data"> </a></h4><p>From the above current version of our dataset, it is obvious that we have made significant progress. We have a 
+data-frame of the percentages of males and females with their respective states that earned five credit and above. Going by the tidy data guideline, our data-frame need to undergo some structure adjustment and re-alignment. Since our goal is to merge all the data in all the sheet into one table, i.e. data-frame, other sheets would pass through similar procedures.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">tidy_private_2016</span> <span class="o">=</span> <span class="n">rename_col</span><span class="o">.</span><span class="n">melt</span><span class="p">(</span><span class="n">id_vars</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;States&#39;</span><span class="p">],</span> <span class="n">value_vars</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Male&#39;</span><span class="p">,</span> <span class="s1">&#39;Female&#39;</span><span class="p">],</span><span class="n">var_name</span><span class="o">=</span><span class="s1">&#39;Sex&#39;</span><span class="p">,</span><span class="n">value_name</span><span class="o">=</span><span class="s1">&#39;pct_five_credit_above&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">tidy_private_2016</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>States</th>
+      <th>Sex</th>
+      <th>pct_five_credit_above</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>ABIA</td>
+      <td>Male</td>
+      <td>11.3269</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>ABUJA</td>
+      <td>Male</td>
+      <td>6.53595</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>ADAMAWA</td>
+      <td>Male</td>
+      <td>6.42857</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>AKWA IBOM</td>
+      <td>Male</td>
+      <td>12.0308</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>ANAMBRA</td>
+      <td>Male</td>
+      <td>16.7679</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>69</th>
+      <td>RIVERS</td>
+      <td>Female</td>
+      <td>47.2096</td>
+    </tr>
+    <tr>
+      <th>70</th>
+      <td>SOKOTO</td>
+      <td>Female</td>
+      <td>12.9032</td>
+    </tr>
+    <tr>
+      <th>71</th>
+      <td>TARABA</td>
+      <td>Female</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>72</th>
+      <td>YOBE</td>
+      <td>Female</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>73</th>
+      <td>ZAMFARA</td>
+      <td>Female</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+<p>74 rows × 3 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Conclusion">Conclusion<a class="anchor-link" href="#Conclusion"> </a></h2><p>From the above version of our dataset, we can see that the current version satisfies all the tidy data guidelines and principles. Thus our dataset was transformed from wide to long. We have in the course of this post demonstrate data cleaning, wrangling and restructuring.  However, more cleaning and restructuring can be carried out to fine-tune the dataset further. Still, we would conclude this post here as we have achieved the objective of demonstrating how data tidying is done using pandas. I hope you have  learned something today</p>
+
+</div>
+</div>
+</div>
+</div>
+
+
+
+  </div><a class="u-url" href="/DataMusings/fastpages/jupyter/2020/12/07/tidy.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/DataMusings/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/DataMusings/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/DataMusings/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>Data gymnastics... Enter Zen from there!.</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://twitter.com/ajakzheddy" title="ajakzheddy"><svg class="svg-icon grey"><use xlink:href="/DataMusings/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
