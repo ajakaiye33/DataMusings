@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Feature Engineering With Feature-Engine Package(1) | DataPonderings</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Feature Engineering With Feature-Engine Package(1)" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="The Feature-Engine Module." />
+<meta property="og:description" content="The Feature-Engine Module." />
+<link rel="canonical" href="https://ajakaiye33.github.io/DataMusings/markdown/2020/10/19/feature.html" />
+<meta property="og:url" content="https://ajakaiye33.github.io/DataMusings/markdown/2020/10/19/feature.html" />
+<meta property="og:site_name" content="DataPonderings" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-10-19T00:00:00-05:00" />
+<script type="application/ld+json">
+{"description":"The Feature-Engine Module.","url":"https://ajakaiye33.github.io/DataMusings/markdown/2020/10/19/feature.html","@type":"BlogPosting","headline":"Feature Engineering With Feature-Engine Package(1)","dateModified":"2020-10-19T00:00:00-05:00","datePublished":"2020-10-19T00:00:00-05:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://ajakaiye33.github.io/DataMusings/markdown/2020/10/19/feature.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/DataMusings/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://ajakaiye33.github.io/DataMusings/feed.xml" title="DataPonderings" /><link rel="shortcut icon" type="image/x-icon" href="/DataMusings/images/favicon.ico"><link href="https://cdn.jsdelivr.net/npm/@primer/css/dist/primer.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"> </script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement( document.body, {
+        delimiters: [
+            {left: "$$", right: "$$", display: true},
+            {left: "[%", right: "%]", display: true},
+            {left: "$", right: "$", display: false}
+        ]}
+        );
+    });
+    </script>
+
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/DataMusings/">DataPonderings</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/DataMusings/about/">About Me</a><a class="page-link" href="/DataMusings/search/">Search</a><a class="page-link" href="/DataMusings/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Feature Engineering With Feature-Engine Package(1)</h1><p class="page-description">The Feature-Engine Module.</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-10-19T00:00:00-05:00" itemprop="datePublished">
+        Oct 19, 2020
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      5 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/DataMusings/categories/#markdown">markdown</a>
+        
+      
+      </p>
+    
+
+    </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul class="section-nav">
+<li class="toc-entry toc-h3"><a href="#introduction">Introduction</a></li>
+<li class="toc-entry toc-h3"><a href="#handling-and-imputing-missing-data">Handling and Imputing Missing Data.</a></li>
+<li class="toc-entry toc-h3"><a href="#common-steps-and-forms-of-handling-missing-data">Common steps and forms of handling missing data</a></li>
+<li class="toc-entry toc-h3"><a href="#install--import-and-load-necessary-package-and-datasets">Install  Import and load necessary package and datasets</a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#modify-dataset-to-suite-our-purpose">Modify dataset to suite our purpose</a></li>
+<li class="toc-entry toc-h4"><a href="#removing-observation-with-missing-data">Removing observation with missing data</a></li>
+<li class="toc-entry toc-h4"><a href="#mean-and-median-imputation">Mean and Median imputation</a></li>
+<li class="toc-entry toc-h4"><a href="#mode-or-frequent-category-imputation">Mode or frequent category imputation</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h3"><a href="#conclusion">Conclusion</a></li>
+</ul><p><img src="/images/wide.jpg" alt=""></p>
+
+<h3 id="introduction">
+<a class="anchor" href="#introduction" aria-hidden="true"><span class="octicon octicon-link"></span></a>Introduction</h3>
+<p>I can remember in my last post I render some popular definitions of Data science
+that are out there. In one such description, I referred to the fact that data science was not just a science but an art. You may be curious: ‘How is Data Science an art?’
+From my perspective, art is more or less an unstructured process, or without a universal modus operandi but centred on individual expressiveness and creativity. An aspect of Data science where
+artistry and creativity comes to play is no other than <em>Feature Engineering</em></p>
+
+<p>Therefore this post is about the art and craft of feature engineering, a necessary
+and fundamental activity and process under data cleaning and preparation. It is an essential process, especially when you need to prepare data for machine learning. No doubt Feature Engineering
+is a broad topic however my objective is to highlight some salient and practical aspect using
+Feature-Engine a python package that is fast gaining momentum over the popular scikit-learn package.</p>
+
+<p>For sufficient coverage would break this topic into a series wherein different aspect of feature engineering would be highlighted and how the package feature engine makes such process neat clean and simple compared to the conventional scikit-learn package.</p>
+
+<h3 id="handling-and-imputing-missing-data">
+<a class="anchor" href="#handling-and-imputing-missing-data" aria-hidden="true"><span class="octicon octicon-link"></span></a>Handling and Imputing Missing Data.</h3>
+<p>You will agree with me that this is one area in the data cleaning process that gives a lot of machine learning newbies sleepless nights! As a way of definition, the act of <em>replacing missing data with a statistical estimate of missing values</em> is called imputation. The primary goal of any imputation technique is to have a dataset used to train machine learning models. The form of imputation employed usually would depend on the following:</p>
+
+<ul>
+  <li>Is the data missing at random</li>
+  <li>The number of missing values</li>
+  <li>and the type of machine learning model to be used or apply</li>
+</ul>
+
+<h3 id="common-steps-and-forms-of-handling-missing-data">
+<a class="anchor" href="#common-steps-and-forms-of-handling-missing-data" aria-hidden="true"><span class="octicon octicon-link"></span></a>Common steps and forms of handling missing data</h3>
+<p>In the course of the post, we shall demonstrate and discuss the following ways/methods:</p>
+
+<ul>
+  <li>Removing observations with missing data</li>
+  <li>Mean or median imputation</li>
+  <li>Mode or frequent category imputation</li>
+</ul>
+
+<p><img src="/images/missing.jpg" alt=""></p>
+
+<h3 id="install--import-and-load-necessary-package-and-datasets">
+<a class="anchor" href="#install--import-and-load-necessary-package-and-datasets" aria-hidden="true"><span class="octicon octicon-link"></span></a>Install  Import and load necessary package and datasets</h3>
+<p>To perform and demonstrate the above processes, we would need the python packages:</p>
+<ul>
+  <li>Numpy</li>
+  <li>Pandas</li>
+  <li>Scikit-learn</li>
+  <li>Feature-Engine</li>
+</ul>
+
+<p>You can have the above packages in one fell swoop when you install the free Anaconda Python distribution <a href="'https://www.anaconda.com/distribution/'">here</a></p>
+
+<p>Also to know more about Feature-engine visit <a href="'https://feature-engine.readthedocs.io'">here</a></p>
+
+<p>Meanwhile shall use the <a href="'http://archive.ics.uci.edu/machine-learning-databases/credit-screening/'">crx.data</a> for illustration</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># import necessary packages
+</span><span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="kn">import</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+</code></pre></div></div>
+<h4 id="modify-dataset-to-suite-our-purpose">
+<a class="anchor" href="#modify-dataset-to-suite-our-purpose" aria-hidden="true"><span class="octicon octicon-link"></span></a>Modify dataset to suite our purpose</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># load the data
+</span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">'crx.data'</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+<span class="c1"># create a list with variable names
+</span><span class="n">avr_name</span> <span class="o">=</span> <span class="p">[</span><span class="s">'A'</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">17</span><span class="p">)]</span>
+<span class="c1">#put the variable names to dataframe
+</span><span class="n">data</span><span class="p">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">avr_name</span>
+<span class="c1">#replace the question marks(?) in the dataset with numpy NaN values:
+</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">.</span><span class="n">replace</span><span class="p">(</span><span class="s">'?'</span><span class="p">,</span><span class="n">np</span><span class="p">.</span><span class="n">nan</span><span class="p">)</span>
+<span class="c1">#recast the numerical variable as float data types   
+</span><span class="n">data</span><span class="p">[</span><span class="s">'A2'</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">'A2'</span><span class="p">].</span><span class="n">astype</span><span class="p">(</span><span class="s">'float'</span><span class="p">)</span>
+<span class="n">data</span><span class="p">[</span><span class="s">'A14'</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">'A14'</span><span class="p">].</span><span class="n">astype</span><span class="p">(</span><span class="s">'float'</span><span class="p">)</span>
+<span class="c1"># recode the target variable as binary
+</span><span class="n">data</span><span class="p">[</span><span class="s">'A16'</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">'A16'</span><span class="p">].</span><span class="nb">map</span><span class="p">({</span><span class="s">'+'</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s">'-'</span><span class="p">:</span><span class="mi">0</span><span class="p">})</span>
+<span class="c1">#add some missing values
+</span><span class="n">random</span><span class="p">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">values</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="n">random</span><span class="p">.</span><span class="n">ranint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">))</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">)])</span>
+<span class="k">for</span> <span class="n">avr</span> <span class="ow">in</span> <span class="p">[</span><span class="s">'A3'</span><span class="p">,</span><span class="s">'AB'</span><span class="p">,</span><span class="s">'A9'</span><span class="p">,</span><span class="s">'A10'</span><span class="p">]:</span>
+    <span class="n">data</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="n">leaves</span><span class="p">,</span><span class="n">avr</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">nan</span>
+
+<span class="c1"># Save your prepared data
+</span><span class="n">data</span><span class="p">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s">'dredit_app.csv'</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h4 id="removing-observation-with-missing-data">
+<a class="anchor" href="#removing-observation-with-missing-data" aria-hidden="true"><span class="octicon octicon-link"></span></a>Removing observation with missing data</h4>
+
+<p>This method is also called <em>Complete Case Analysis</em>
+The above method involves discarding those observations where the values in any of the variable are missing. We can apply this method in categorical and numerical variables. Although this process is fast and direct but could lead to throwing away a significant amount of data mostly when the value is missing across variables</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#calculate the percentage of missing values and display in descending manner
+</span><span class="n">data</span><span class="p">.</span><span class="n">isna</span><span class="p">().</span><span class="n">mean</span><span class="p">().</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="c1">#remove the observation with missing data in any of the variables
+</span><span class="n">data_clean</span> <span class="o">=</span> <span class="n">data</span><span class="p">.</span><span class="n">dropna</span><span class="p">()</span>
+<span class="c1"># check to verify through data shape
+</span><span class="n">data_clean</span><span class="p">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">data</span><span class="p">.</span><span class="n">shape</span>
+</code></pre></div></div>
+
+<h4 id="mean-and-median-imputation">
+<a class="anchor" href="#mean-and-median-imputation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Mean and Median imputation</h4>
+<p>This method is about the popular and somewhat logical. Its essentially involve replacing missing values with the variable mean or median. Under this method, we would show how to replace missing values with the mean or median using scikit-learn and Feature-engine. The best approach as a way of preventing data leakage is to calculate the mean or median using the train part of the data set but apply the result to both datasets: train and test.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#import necessary packages
+</span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn.impute</span> <span class="kn">import</span> <span class="n">SimpleImputer</span>
+<span class="kn">from</span> <span class="nn">feature_engine.missing_data_imputers</span> <span class="kn">import</span> <span class="n">MeanMedianImputer</span>
+</code></pre></div></div>
+<p>we will continue with our data as above</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Xtrain</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">drop</span><span class="p">(</span><span class="s">'A16'</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">data</span><span class="p">[</span><span class="s">'A16'</span><span class="p">],</span><span class="n">test_size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="c1"># check the percentage of missing vales in the training set
+</span><span class="n">Xtrain</span><span class="p">.</span><span class="n">isna</span><span class="p">().</span><span class="n">mean</span><span class="p">()</span>
+
+<span class="c1"># replace the missing values with the median in five numerical variables using pure pandas
+</span><span class="k">for</span> <span class="n">mix</span> <span class="ow">in</span> <span class="p">[</span><span class="s">'A2'</span><span class="p">,</span><span class="s">'A3'</span><span class="p">,</span><span class="s">'A8'</span><span class="p">,</span><span class="s">'A11'</span><span class="p">,</span><span class="s">'A15'</span><span class="p">]:</span>
+    <span class="n">med_val</span> <span class="o">=</span> <span class="n">Xtrain</span><span class="p">[</span><span class="n">mix</span><span class="p">].</span><span class="n">median</span><span class="p">()</span>
+    <span class="n">Xtrain</span><span class="p">[</span><span class="n">mix</span><span class="p">]</span> <span class="o">=</span> <span class="n">Xtrain</span><span class="p">[</span><span class="n">mix</span><span class="p">].</span><span class="n">fillna</span><span class="p">(</span><span class="n">mid_val</span><span class="p">)</span>
+    <span class="n">X_test</span><span class="p">[</span><span class="n">mix</span><span class="p">]</span> <span class="o">=</span> <span class="n">X_test</span><span class="p">[</span><span class="n">mix</span><span class="p">].</span><span class="n">fillna</span><span class="p">(</span><span class="n">mid_val</span><span class="p">)</span>
+</code></pre></div></div>
+<p>Using scikit-learn’s SimpleImputer to replace missing values with median</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">imputer</span> <span class="o">=</span> <span class="n">SimpleImputer</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="s">"mean"</span><span class="p">)</span>
+
+<span class="c1">#fit the SimpleImputer to the train set so ot learn the median values
+</span><span class="n">imputer</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">Xtrain</span><span class="p">)</span>
+
+<span class="c1"># replace missing values with median
+</span><span class="n">Xtrain</span> <span class="o">=</span> <span class="n">imputer</span><span class="p">.</span><span class="n">transform</span><span class="p">(</span><span class="n">Xtrain</span><span class="p">)</span>
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">imputer</span><span class="p">.</span><span class="n">transform</span><span class="p">(</span><span class="n">Xtrain</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Now lets see the simplicity of feature_engine package carrying same processes</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">median_imputer</span> <span class="o">=</span> <span class="n">MeanMedianImputer</span><span class="p">(</span><span class="n">imputation_method</span><span class="o">=</span><span class="s">'median'</span><span class="p">),</span>
+<span class="n">variables</span> <span class="o">=</span> <span class="p">[</span><span class="s">'A2'</span><span class="p">,</span><span class="s">'A3'</span><span class="p">,</span><span class="s">'A8'</span><span class="p">,</span><span class="s">'A11'</span><span class="p">,</span><span class="s">'A15'</span><span class="p">]</span>
+<span class="c1">#fit the median imputer to learn the median from the variables
+</span><span class="n">median_imputer</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">Xtrain</span><span class="p">)</span>
+
+<span class="c1"># replace the missing values with median
+</span><span class="n">Xtrain</span> <span class="o">=</span> <span class="n">median_imputer</span><span class="p">.</span><span class="n">transform</span><span class="p">(</span><span class="n">Xtrain</span><span class="p">)</span>
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">median_imputer</span><span class="p">.</span><span class="n">transform</span><span class="p">(</span><span class="n">Xtest</span><span class="p">)</span>
+</code></pre></div></div>
+<p>One way the feature_engine is better is that it by default return a dataframe after such imputation</p>
+
+<h4 id="mode-or-frequent-category-imputation">
+<a class="anchor" href="#mode-or-frequent-category-imputation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Mode or frequent category imputation</h4>
+<p>This method involves replacing missing values with the mode. This method is common in categorical variables.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#import necessary packages
+</span><span class="kn">from</span> <span class="nn">feature_engine.missing_data_imputers</span> <span class="kn">import</span> <span class="n">FrequentCategoryImputer</span>
+</code></pre></div></div>
+<p>As usual, we shall continue with our data as above. Don’t forget to split the dataset into train and test parts. We would go straight and show how this procedure is implemented with feature_engine as similar procedure as used above with pandas, and scikit-learn.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mode_imputer</span> <span class="o">=</span> <span class="n">FrequentCategoryImputer</span><span class="p">(</span><span class="n">variables</span><span class="o">=</span><span class="p">[</span><span class="s">'A4'</span><span class="p">,</span><span class="s">'A5'</span><span class="p">,</span><span class="s">'A6'</span><span class="p">,</span><span class="s">'A7'</span><span class="p">])</span>
+
+<span class="c1"># fit the imputation transformer to the train set to learn the most frequent categories
+</span>
+<span class="n">mode_imputer</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">Xtrain</span><span class="p">)</span>
+
+<span class="c1"># inspect the the learned frequent categories
+</span><span class="n">mode_imputer</span><span class="p">.</span><span class="n">imputer_dict_</span>
+<span class="c1"># replace the missing values with frequent categories
+</span>
+<span class="n">Xtrain</span> <span class="o">=</span> <span class="n">mode_imputer</span><span class="p">.</span><span class="n">transform</span><span class="p">(</span><span class="n">Xtrain</span><span class="p">)</span>
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">mode_imputer</span><span class="p">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+</code></pre></div></div>
+<h3 id="conclusion">
+<a class="anchor" href="#conclusion" aria-hidden="true"><span class="octicon octicon-link"></span></a>Conclusion</h3>
+<p>I hope you are as astonished as I was when I  first discovered feature_engine package. The good thing about this python package is what I referred to as ‘specialized attention’ to feature engineering for machine learning. I hope you learned something today.
+Bye!</p>
+
+  </div><a class="u-url" href="/DataMusings/markdown/2020/10/19/feature.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/DataMusings/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/DataMusings/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/DataMusings/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>Data gymnastics... Enter Zen from there!.</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://twitter.com/ajakzheddy" title="ajakzheddy"><svg class="svg-icon grey"><use xlink:href="/DataMusings/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Beginning Data Analysis And Data Science | DataPonderings</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Beginning Data Analysis And Data Science" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Data Analytics and Science Process." />
+<meta property="og:description" content="Data Analytics and Science Process." />
+<link rel="canonical" href="https://ajakaiye33.github.io/DataMusings/markdown/2020/10/12/approach_data.html" />
+<meta property="og:url" content="https://ajakaiye33.github.io/DataMusings/markdown/2020/10/12/approach_data.html" />
+<meta property="og:site_name" content="DataPonderings" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-10-12T00:00:00-05:00" />
+<script type="application/ld+json">
+{"description":"Data Analytics and Science Process.","url":"https://ajakaiye33.github.io/DataMusings/markdown/2020/10/12/approach_data.html","@type":"BlogPosting","headline":"Beginning Data Analysis And Data Science","dateModified":"2020-10-12T00:00:00-05:00","datePublished":"2020-10-12T00:00:00-05:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://ajakaiye33.github.io/DataMusings/markdown/2020/10/12/approach_data.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/DataMusings/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://ajakaiye33.github.io/DataMusings/feed.xml" title="DataPonderings" /><link rel="shortcut icon" type="image/x-icon" href="/DataMusings/images/favicon.ico"><link href="https://cdn.jsdelivr.net/npm/@primer/css/dist/primer.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"> </script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement( document.body, {
+        delimiters: [
+            {left: "$$", right: "$$", display: true},
+            {left: "[%", right: "%]", display: true},
+            {left: "$", right: "$", display: false}
+        ]}
+        );
+    });
+    </script>
+
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/DataMusings/">DataPonderings</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/DataMusings/about/">About Me</a><a class="page-link" href="/DataMusings/search/">Search</a><a class="page-link" href="/DataMusings/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Beginning Data Analysis And Data Science</h1><p class="page-description">Data Analytics and Science Process.</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-10-12T00:00:00-05:00" itemprop="datePublished">
+        Oct 12, 2020
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      4 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/DataMusings/categories/#markdown">markdown</a>
+        
+      
+      </p>
+    
+
+    </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul class="section-nav">
+<li class="toc-entry toc-h3"><a href="#introduction">Introduction</a></li>
+<li class="toc-entry toc-h3"><a href="#pre-data-steps">Pre-Data Steps</a></li>
+<li class="toc-entry toc-h3"><a href="#data-steps">Data Steps</a></li>
+<li class="toc-entry toc-h3"><a href="#conclusion">Conclusion</a></li>
+</ul><p><img src="/images/wide.jpg" alt=""></p>
+
+<h3 id="introduction">
+<a class="anchor" href="#introduction" aria-hidden="true"><span class="octicon octicon-link"></span></a>Introduction</h3>
+<p>Data science as a concept and practice has many definitions. Some definitions out there are:
+‘ Data Science is the sexiest field of study and or career’.  ‘ Data Science is a Multidisciplinary study anchored on domain knowledge’. ‘ Data Science is an intersection of Statistics, Computer Science, Mathematics, Software Development and Domain expertise’.  e.t.c .
+You would agree that Data Science is an exceptionally diverse and exciting field which marries both worlds of art and sciences.
+My favourite definition is that which considers Data Science as a Multidisciplinary study because, in my opinion, Data Science is not an end of itself but a means to an end! On that note, I welcome you, yes, you reader- to this week’s post which promises to be exciting and educative.</p>
+
+<p>In the preceding lines, I surmised that Data Science is a means to an end and not the other way round because, from my experience, its application transcends many filed of study and careers. To this end, any domain expert or domain newbie can apply the power of data science to solve problems unique to that domain. As much as I  acknowledge these characteristics as plausible, there are some drawbacks and shortcomings. However, the most glaring one is the tendency to attract individuals with little or no foundation in Statistics, Mathematics and coding skills. My attention is on such category of persons because I believe with some structure anybody irrespective of their knowledge of Statistics, Mathematics or python skills can apply and unleash the powers of data science. Consequently, the focus of this post is on the initial steps that you observed as you decide to solve a Data Science problem. I classify these steps into two broad parts:</p>
+<ul>
+  <li>Pre Data steps</li>
+  <li>Data steps</li>
+</ul>
+
+<p><img src="/images/circle.jpg" alt=""></p>
+
+<h3 id="pre-data-steps">
+<a class="anchor" href="#pre-data-steps" aria-hidden="true"><span class="octicon octicon-link"></span></a>Pre-Data Steps</h3>
+<p>While this step is the most crucial in the data science circle, it is equally the most overlooked or neglected.  A typical data science circle may involve:</p>
+<ul>
+  <li>Understanding product snd client</li>
+  <li>Data Exploration</li>
+  <li>Hypothesis formation</li>
+  <li>Data Massaging</li>
+  <li>Experimenting</li>
+  <li>Communicating results</li>
+  <li>and Iterating</li>
+</ul>
+
+<p>From the above steps, not for nothing does a pre-data step- Underderstanding product and clients- comes first. It’s a critical step that formed the foundation of other steps. Understanding product and clients mean being abreast with the goals and objective of the problem. To cover this step sufficiently, you may ponder and answer the following questions:</p>
+
+<ul>
+  <li>why is this problem important? <strong>as they say there is a story behind a story</strong> This may involve carrying out a need analysis from the perspective of the client or the owner of the data</li>
+  <li>Is there enough data?</li>
+  <li>How can performance be measured or the Key Performance Indicator</li>
+  <li>Will the solution be descriptive and or prescriptive?</li>
+  <li>Does the problem require data science or machine learning?</li>
+  <li>what tools or environment available or affordable</li>
+  <li>e.t.c</li>
+</ul>
+
+<p>Of course, this list is by no means exhaustive. The more questions, the more profound will your understanding of the clients and products.</p>
+
+<p><img src="/images/steps.jpg" alt=""></p>
+
+<h3 id="data-steps">
+<a class="anchor" href="#data-steps" aria-hidden="true"><span class="octicon octicon-link"></span></a>Data Steps</h3>
+<p>Under this phase, the probing moves from theoretical to more technical.</p>
+<ul>
+  <li>Meta Data</li>
+  <li>Data preprocessing</li>
+</ul>
+
+<p>Meta Data is simply data about data, and the following process can be used under a jupyter/pandas environment to understand the metadata of our data set.</p>
+
+<p>Load the data unto jupyter using the appropriate pandas’ method to read your data accordingly. Assuming the data is in CSV format, we would read and saved it to a variable</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+</code></pre></div></div>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">data_read</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">'path to data on local machine or external url'</span><span class="p">)</span><span class="err">`</span>
+</code></pre></div></div>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">data_read</span><span class="p">.</span><span class="n">shape</span>
+<span class="c1">#get the numbers of columns and rows of data
+</span></code></pre></div></div>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">data_read</span><span class="p">.</span><span class="n">info</span><span class="p">()</span>
+ <span class="c1"># displays detailed info about the data set`
+</span></code></pre></div></div>
+
+<pre><code class="language-Python"> data_read.dtypes # displays the various data types of the variables in of the data sexiest
+</code></pre>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="n">data_read</span><span class="p">.</span><span class="n">describe</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="n">np</span><span class="p">.</span><span class="n">number</span><span class="p">]).</span><span class="n">T</span> <span class="c1"># Get the summary Statistics for the numerical variable and transpose the DataFrame
+</span></code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">data_read</span><span class="p">.</span><span class="n">describe</span><span class="p">(</span><span class="n">include</span> <span class="o">=</span><span class="p">[</span><span class="n">np</span><span class="p">.</span><span class="nb">object</span><span class="p">,</span> <span class="n">pd</span><span class="p">.</span><span class="n">Categorical</span><span class="p">]).</span><span class="n">T</span> <span class="c1"># Get the summary Statistics for the object and Categorical columns
+</span></code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">data_read</span><span class="p">.</span><span class="n">memory_usage</span><span class="p">(</span><span class="n">deep</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="c1"># display the space occupied by the various data variables and types
+</span></code></pre></div></div>
+
+<p>Data preprocessing include any and every data <em>acrobatics</em> deemed necessary to shape the required data for further analysis or machine learning.
+However, the entire Data steps can be subsumed under data exploration, as noted under the data science life circle.</p>
+
+<h3 id="conclusion">
+<a class="anchor" href="#conclusion" aria-hidden="true"><span class="octicon octicon-link"></span></a>Conclusion</h3>
+<p>The field of data science is a growing field of study and career. Because of this dynamism, processes and procedures changes by the speed of light, and the best attitude is to have an open mind and  be ready to learn to unlearn and re-learn. And talking about education, I hope you have learned something, however small from this post.
+Bye!</p>
+
+  </div><a class="u-url" href="/DataMusings/markdown/2020/10/12/approach_data.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/DataMusings/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/DataMusings/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/DataMusings/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>Data gymnastics... Enter Zen from there!.</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://twitter.com/ajakzheddy" title="ajakzheddy"><svg class="svg-icon grey"><use xlink:href="/DataMusings/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
