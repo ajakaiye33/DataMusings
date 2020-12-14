@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Data Preprocessing:Pandas Vs Scikit-Learn | DataPonderings</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Data Preprocessing:Pandas Vs Scikit-Learn" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="The Benefit and Otherwise of Using Scikit-learn For Data Preprocessing." />
+<meta property="og:description" content="The Benefit and Otherwise of Using Scikit-learn For Data Preprocessing." />
+<link rel="canonical" href="https://ajakaiye33.github.io/DataMusings/markdown/2020/12/14/prepro-with-sklearn.html" />
+<meta property="og:url" content="https://ajakaiye33.github.io/DataMusings/markdown/2020/12/14/prepro-with-sklearn.html" />
+<meta property="og:site_name" content="DataPonderings" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-12-14T00:00:00-06:00" />
+<script type="application/ld+json">
+{"description":"The Benefit and Otherwise of Using Scikit-learn For Data Preprocessing.","url":"https://ajakaiye33.github.io/DataMusings/markdown/2020/12/14/prepro-with-sklearn.html","@type":"BlogPosting","headline":"Data Preprocessing:Pandas Vs Scikit-Learn","dateModified":"2020-12-14T00:00:00-06:00","datePublished":"2020-12-14T00:00:00-06:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://ajakaiye33.github.io/DataMusings/markdown/2020/12/14/prepro-with-sklearn.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/DataMusings/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://ajakaiye33.github.io/DataMusings/feed.xml" title="DataPonderings" /><link rel="shortcut icon" type="image/x-icon" href="/DataMusings/images/favicon.ico"><link href="https://cdn.jsdelivr.net/npm/@primer/css/dist/primer.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"> </script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement( document.body, {
+        delimiters: [
+            {left: "$$", right: "$$", display: true},
+            {left: "[%", right: "%]", display: true},
+            {left: "$", right: "$", display: false}
+        ]}
+        );
+    });
+    </script>
+
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/DataMusings/">DataPonderings</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/DataMusings/about/">About Me</a><a class="page-link" href="/DataMusings/search/">Search</a><a class="page-link" href="/DataMusings/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Data Preprocessing:Pandas Vs Scikit-Learn</h1><p class="page-description">The Benefit and Otherwise of Using Scikit-learn For  Data Preprocessing.</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-12-14T00:00:00-06:00" itemprop="datePublished">
+        Dec 14, 2020
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      4 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/DataMusings/categories/#markdown">markdown</a>
+        
+      
+      </p>
+    
+
+    </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul class="section-nav">
+<li class="toc-entry toc-h2"><a href="#introduction">Introduction</a></li>
+<li class="toc-entry toc-h2"><a href="#typical-data-preprocessing-activities">Typical Data Preprocessing Activities</a></li>
+<li class="toc-entry toc-h2"><a href="#tools-for-data-preprocessing">Tools for Data Preprocessing</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#preprocessing-with-pandas">Preprocessing with Pandas</a></li>
+<li class="toc-entry toc-h3"><a href="#preprocessing-with-scikit-learn">Preprocessing with Scikit-learn</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#demonstrate-scikit-learn-for-data-preprocessing-and-model-building">Demonstrate scikit-learn for Data Preprocessing and model Building</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#import-necessary-modules-and-packages">Import necessary modules and packages</a></li>
+<li class="toc-entry toc-h3"><a href="#load-the-dataset-and-select-rows-and-columns">Load the Dataset and select rows and columns</a></li>
+<li class="toc-entry toc-h3"><a href="#initialize-classes">Initialize classes</a></li>
+<li class="toc-entry toc-h3"><a href="#preprocess-and-fit-model">Preprocess and Fit Model</a></li>
+<li class="toc-entry toc-h3"><a href="#set-step-in-to-pipeline">Set step in to Pipeline</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#conclusion">Conclusion</a></li>
+</ul><p><img src="/images/pipeline.jpg" alt="" title="Data Pipeline"></p>
+
+<h2 id="introduction">
+<a class="anchor" href="#introduction" aria-hidden="true"><span class="octicon octicon-link"></span></a>Introduction</h2>
+
+<blockquote>
+  <p>When I was a child, I talked like a child, I thought like a child, I reasoned like a child. When I became a man, I set aside childish ways - 1 Corinthians 13:11</p>
+</blockquote>
+
+<p>In a previous post, I posited that a key aspect of Data Science is the Data Science Process Life Circle. Essentially, DSLC is a bunch of activities and processes which underpinned the Data Science process. Some of the procedure which makes up the Data Science Process Life Circle are:</p>
+
+<ul>
+  <li>Obtain</li>
+  <li>Scrub</li>
+  <li>Explore</li>
+  <li>Model</li>
+  <li>Interpret</li>
+</ul>
+
+<p>Given the topic of this post our discussion shall revolve around just two out of the above five procedures: <em>Scrub</em> and <em>Model</em>
+Data scrubbing and Model Building are like siamese twins; the output of the former serves as the input for the latter.  In this relationship, the relevance of the Data preprocessing stage can not be overemphasized in the subsequent activity of Model Building.
+As a matter of fact, the majority of Data Science practitioners holds the view that data preprocessing has a strong relationship with the model’s performance.</p>
+
+<p>Therefore today’s post is centred around the tools for data preprocessing, their advantages and disadvantages, especially given model performance.</p>
+
+<h2 id="typical-data-preprocessing-activities">
+<a class="anchor" href="#typical-data-preprocessing-activities" aria-hidden="true"><span class="octicon octicon-link"></span></a>Typical Data Preprocessing Activities</h2>
+<p>I sensed some of us might be curious as to ‘what are typical examples of this data preprocessing’ stage. I’m happy to address such and similar curiosity.
+ Data preprocessing is any activity or procedure carried out on a dataset necessary for building a model. Examples of typical data preprocessing activities are:</p>
+
+<ul>
+  <li>Detecting and handling missing values</li>
+  <li>Detecting and handling outliers</li>
+  <li>Creating new features from existing once</li>
+  <li>Drop existing features</li>
+  <li>transforming categorical features</li>
+  <li>transforming numerical features  e.t.c.</li>
+</ul>
+
+<h2 id="tools-for-data-preprocessing">
+<a class="anchor" href="#tools-for-data-preprocessing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Tools for Data Preprocessing</h2>
+<p>The above-listed activities of data preprocessing can be carried out with the aid of two broad tools or modules: Pandas Preprocessing and Scikit-learn Preprocessing.</p>
+
+<h3 id="preprocessing-with-pandas">
+<a class="anchor" href="#preprocessing-with-pandas" aria-hidden="true"><span class="octicon octicon-link"></span></a>Preprocessing with Pandas</h3>
+<p>Pandas is one of the critical tools for data science in general. Its creation without missing words moved data science as a profession forward.
+As a matter of fact, my mentor who introduced me to the beautiful world of data Science believed all preprocessing procedures in machine learning must be carried out with pandas. This view though not totally correct made be embraced and believed pandas as the sole data preprocessing tool. However, you could summit that I had a narrow perspective concerning data preprocessing. Still, I’m thankful for such short-sightedness as it allowed me to deepen my knowledge and understanding of Pandas.
+some of the popular pandas methods and functions for data preprocessingg are as follows:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">get_dummies()</code></li>
+  <li><code class="language-plaintext highlighter-rouge">fillna()</code></li>
+  <li><code class="language-plaintext highlighter-rouge">replace()</code></li>
+  <li><code class="language-plaintext highlighter-rouge">ffill()</code></li>
+  <li>
+<code class="language-plaintext highlighter-rouge">bfill()</code> e.t.c.</li>
+</ul>
+
+<p>A major drawback in using pandas for data preprocessing is data leakage. Thus with pandas, the chance for data leakage is higher when pandas are used for data preprocessing. This is possible because pandas don’t have the capability to preprocess and learn in one breathe like scikit-learn.</p>
+
+<h3 id="preprocessing-with-scikit-learn">
+<a class="anchor" href="#preprocessing-with-scikit-learn" aria-hidden="true"><span class="octicon octicon-link"></span></a>Preprocessing with Scikit-learn</h3>
+<p>Scikit-learn is a python package which houses the algorithms with which models are built. Scikit-learn module is principally used for performing machine learning and model building. However, I recently came across a blogpost which brought to my awareness the advantages of doing data preprocessing in scikit-learn as against pandas. In that blog post, the author argued that when you use scikit-learn to preprocess data:</p>
+
+<ol>
+  <li>You can cross-validate the entire workflow</li>
+  <li>You can grid search model and preprocess hyperparameters</li>
+  <li>Avoids adding new columns to the source DataFrame</li>
+  <li>Pandas lacks separate fit/transform steps to prevent data leakage.</li>
+</ol>
+
+<p>Since I encountered scikit-learn for preprocessing, I can categorically state that not only has my workflow become more simplified my model performance has also improved tremendously.</p>
+
+<h2 id="demonstrate-scikit-learn-for-data-preprocessing-and-model-building">
+<a class="anchor" href="#demonstrate-scikit-learn-for-data-preprocessing-and-model-building" aria-hidden="true"><span class="octicon octicon-link"></span></a>Demonstrate scikit-learn for Data Preprocessing and model Building</h2>
+
+<h3 id="import-necessary-modules-and-packages">
+<a class="anchor" href="#import-necessary-modules-and-packages" aria-hidden="true"><span class="octicon octicon-link"></span></a>Import necessary modules and packages</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># import necessary package and classes
+</span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">OneHotEncoder</span>
+<span class="kn">from</span> <span class="nn">sklearn.impute</span> <span class="kn">import</span> <span class="n">SimpleImputer</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+<span class="kn">from</span> <span class="nn">sklearn.compose</span> <span class="kn">import</span> <span class="n">make_column_transformer</span>
+<span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">make_pipeline</span>
+</code></pre></div></div>
+<h3 id="load-the-dataset-and-select-rows-and-columns">
+<a class="anchor" href="#load-the-dataset-and-select-rows-and-columns" aria-hidden="true"><span class="octicon octicon-link"></span></a>Load the Dataset and select rows and columns</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># load dataset
+</span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">'http://bit.ly/kaggletrain'</span><span class="p">,</span> <span class="n">nrows</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">cols</span> <span class="o">=</span> <span class="p">[</span><span class="s">'Embarked'</span><span class="p">,</span> <span class="s">'Sex'</span><span class="p">,</span> <span class="s">'Age'</span><span class="p">,</span> <span class="s">'Fare'</span><span class="p">]</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">cols</span><span class="p">]</span>
+</code></pre></div></div>
+
+<h3 id="initialize-classes">
+<a class="anchor" href="#initialize-classes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Initialize classes</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ohe</span> <span class="o">=</span> <span class="n">OneHotEncoder</span><span class="p">()</span> <span class="c1">#endcode 1 and 0 in place of categorical values
+</span><span class="n">imp</span> <span class="o">=</span> <span class="n">SimpleImputer</span><span class="p">()</span> <span class="c1">#replace missing values with mean
+</span><span class="n">clf</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">()</span> <span class="c1"># our choice of algorithm for the model
+</span></code></pre></div></div>
+
+<h3 id="preprocess-and-fit-model">
+<a class="anchor" href="#preprocess-and-fit-model" aria-hidden="true"><span class="octicon octicon-link"></span></a>Preprocess and Fit Model</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ct</span> <span class="o">=</span> <span class="n">make_column_transformer</span><span class="p">(</span>
+     <span class="p">(</span><span class="n">ohe</span><span class="p">,</span> <span class="p">[</span><span class="s">'Embarked'</span><span class="p">,</span> <span class="s">'Sex'</span><span class="p">]),</span>
+     <span class="p">(</span><span class="n">imp</span><span class="p">,</span> <span class="p">[</span><span class="s">'Age'</span><span class="p">]),</span>
+     <span class="n">remainder</span><span class="o">=</span><span class="s">'passthrough'</span><span class="p">)</span><span class="c1"># ignore other columns while you preprocess the specified features/columns
+</span>     <span class="p">)</span>
+
+</code></pre></div></div>
+
+<h3 id="set-step-in-to-pipeline">
+<a class="anchor" href="#set-step-in-to-pipeline" aria-hidden="true"><span class="octicon octicon-link"></span></a>Set step in to Pipeline</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pipe</span> <span class="o">=</span> <span class="n">make_pipeline</span><span class="p">(</span><span class="n">ct</span><span class="p">,</span> <span class="n">clf</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>From the above snippet of code, we can see that we could carry out some preprocessing activities like replacement of missing values, dummy creation e.t.c in one fell swoop under one function:make_column_transformer</p>
+
+<h2 id="conclusion">
+<a class="anchor" href="#conclusion" aria-hidden="true"><span class="octicon octicon-link"></span></a>Conclusion</h2>
+<p>Machine learning tends to be complicated and complex very quickly. So it behoves the data science practitioner to avail himself of the right tools to reduce as much as a possible unnecessary complication. In the course of this post, we have discourse, demonstrated and drew our attention to the advantages of using python’s scikit-learn package for data preprocessing against python’s Pandas.
+I hope you have learned something today. Bye!</p>
+
+  </div><a class="u-url" href="/DataMusings/markdown/2020/12/14/prepro-with-sklearn.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/DataMusings/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/DataMusings/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/DataMusings/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>Data gymnastics... Enter Zen from there!.</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://twitter.com/ajakzheddy" title="ajakzheddy"><svg class="svg-icon grey"><use xlink:href="/DataMusings/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
