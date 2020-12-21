@@ -1,4 +1,75 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://ajakaiye33.github.io/DataMusings/feed.xml" rel="self" type="application/atom+xml" /><link href="https://ajakaiye33.github.io/DataMusings/" rel="alternate" type="text/html" /><updated>2020-12-14T12:04:05-06:00</updated><id>https://ajakaiye33.github.io/DataMusings/feed.xml</id><title type="html">DataPonderings</title><subtitle>Data gymnastics... Enter Zen from there!.</subtitle><entry><title type="html">Data Preprocessing:Pandas Vs Scikit-Learn</title><link href="https://ajakaiye33.github.io/DataMusings/markdown/2020/12/14/prepro-with-sklearn.html" rel="alternate" type="text/html" title="Data Preprocessing:Pandas Vs Scikit-Learn" /><published>2020-12-14T00:00:00-06:00</published><updated>2020-12-14T00:00:00-06:00</updated><id>https://ajakaiye33.github.io/DataMusings/markdown/2020/12/14/prepro-with-sklearn</id><content type="html" xml:base="https://ajakaiye33.github.io/DataMusings/markdown/2020/12/14/prepro-with-sklearn.html">&lt;p&gt;&lt;img src=&quot;/images/pipeline.jpg&quot; alt=&quot;&quot; title=&quot;Data Pipeline&quot; /&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://ajakaiye33.github.io/DataMusings/feed.xml" rel="self" type="application/atom+xml" /><link href="https://ajakaiye33.github.io/DataMusings/" rel="alternate" type="text/html" /><updated>2020-12-21T11:56:56-06:00</updated><id>https://ajakaiye33.github.io/DataMusings/feed.xml</id><title type="html">DataPonderings</title><subtitle>Data gymnastics... Enter Zen from there!.</subtitle><entry><title type="html">2020:Learning Journey and Milestones</title><link href="https://ajakaiye33.github.io/DataMusings/markdown/2020/12/21/reflections.html" rel="alternate" type="text/html" title="2020:Learning Journey and Milestones" /><published>2020-12-21T00:00:00-06:00</published><updated>2020-12-21T00:00:00-06:00</updated><id>https://ajakaiye33.github.io/DataMusings/markdown/2020/12/21/reflections</id><content type="html" xml:base="https://ajakaiye33.github.io/DataMusings/markdown/2020/12/21/reflections.html">&lt;p&gt;&lt;img src=&quot;/images/reflection.jpeg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;Hey there, yes you and everyone that have taken out time to read my blog or ‘blabbing page’ this year, I say thank you from the bottom of my heart! There is no doubt that this year, ‘the year of the corona-virus’, has been quite tough and challenging. Not only was our social-economic life disrupted, a lot of people, according to the World Health Organization, -over 1.7 million people died from the complications of the covid-19 virus.&lt;/p&gt;
+
+&lt;p&gt;Obviously, a greater part of the year was inundated with the gloom and doom of the coronavirus, but in the midst of these dark episodes, there were occasional flashes of light, warmth and hope here and there. I had my own flashes. Hope you had yours. Today’s post will be more or less a review of my struggles and achievements in the year of the coronavirus!&lt;/p&gt;
+
+&lt;p&gt;To do justice to this topic, I have decided to discuss my trumps and triumphs under the following subheadings:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Books read
+    &lt;ul&gt;
+      &lt;li&gt;Technical Books&lt;/li&gt;
+      &lt;li&gt;Non-Technical Books&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Data Science Projects&lt;/li&gt;
+  &lt;li&gt;Volunteer Work&lt;/li&gt;
+  &lt;li&gt;Blog Posts&lt;/li&gt;
+  &lt;li&gt;Certifications and Exams&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;certification-and-exams&quot;&gt;Certification and Exams&lt;/h2&gt;
+
+&lt;p&gt;I’m proud to say that being certified as an AWS cloud Practioner was one of the positive moments of the year 2020. As a matter of fact, the certification was one of my first achievements of the year. I sat for the exam on the 23rd of January 2020 and after barely 24 hours received an email from AWS through Certmetrics saying:&lt;/p&gt;
+&lt;blockquote&gt;
+
+&lt;/blockquote&gt;
+
+&lt;p&gt;You will agree with me that the timing between when I received notice of my results and the subsequent onslaught of the coronavirus was quite creepy and inauspicious because less than two weeks, the infamous total ‘shutdowns’ started owing to the spread of the covid19 virus. No thanks to covid-19, I never had the opportunity to celebrate and take myself out for a drink at the pubs. The experience that humanity was undergoing was depicted in a Pinterest Parody post which showed humans taking the place of the animals in the zoo and like a role reverse scenario, the animals roaming freely on our empty streets and parks!&lt;/p&gt;
+
+&lt;p&gt;As a survivalist strategy, I decided to put my hands and mind to work as a means of coping with the apparent boredom.
+To this end, I started getting my hands dirty with data science projects.&lt;/p&gt;
+
+&lt;h2 id=&quot;data-science-projects&quot;&gt;Data Science Projects&lt;/h2&gt;
+&lt;p&gt;My first project was a personal attempt to make sense of my country’s data on the covid-19 virus. I started with recording and tracking on daily bases reports on the numbers of confirmed cases, deaths, hospitalizations and recoveries as I could not find a time series format data sets with these variables for the different states of the country.
+Fortunately, I was lucky to come across a website that had the data set I needed. So I wrote a small python script to extract and pipe the data to my app, which updates automatically with no manual intervention in any way.&lt;/p&gt;
+
+&lt;p&gt;I wanted to display my Exploratory Data Analysis, visualizations and predictive modelling skills to the World. This desires led me to &lt;a href=&quot;'https://www.streamlit.io/'&quot;&gt;streamlit &lt;/a&gt; platform. With streamlit, I was able to turn my jupyter notebook to a dashboard! I personally love streamlit, and I strongly suggest you try it out if you have not.&lt;/p&gt;
+
+&lt;p&gt;Through streamlit, I put together a dashboard with varied visualizations and also implemented with &lt;a href=&quot;'https://pypi.org/project/prophet/'&quot;&gt;Prophet&lt;/a&gt; a forecasting model to predict the growth and plateau of confirmed covid-19 cases. To host my streamlit app so that it will be available to everyone in the world, I turned to &lt;a href=&quot;'https://www.heroku.com/'&quot;&gt;Heroku&lt;/a&gt;. Heroku made deployment easy and intuitive! Although still under active building process you can see the deployed version of the app &lt;a href=&quot;'https://covid-streamlit-app.herokuapp.com/'&quot;&gt;here&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;My second project was a capstone project for my diploma degree in Data Science and Analytics from the University of Petroleum Energy India. Of course, it was a virtual program which took around six months to complete. The live lectures were conducted via zoom and GoToMeeting apps. We were given five topics and dataset. The capstone is expected to be carried out on one area or topic. I chose the topic which required building a predictive model to detect and prevent energy theft, i.e. Electricity Theft. My mentor was a thorough and fantastic dude. With his guide, I was able to build two models: Regression Model and Classification models. The most import takes away from this project for me was the new skills I learned through my mentor on how to handle and detect outliers in machine learning projects. You can see the completed version of the project &lt;a href=&quot;'https://github.com/ajakaiye33/Energy-Theft-Prediction/tree/master'&quot;&gt;here&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;books-read&quot;&gt;Books Read&lt;/h2&gt;
+&lt;h3 id=&quot;technical-books&quot;&gt;Technical Books&lt;/h3&gt;
+&lt;p&gt;I studied three books on data science, data handling and python.
+&lt;strong&gt;Python Projects For Beginners&lt;/strong&gt;, by &lt;em&gt;Connor P. Milliken&lt;/em&gt;
+I really love the ten weeks Journey this book took me through! The author structured the book in such a way that every day of the ten weeks is filled with one activity or another and at the end of the week, a mini-project covering contents and terms studied in prior weekdays is given to the student. I took away a lot of new approach to using the python language for data handling and visualizations.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Python Feature Engineering Cookbook&lt;/strong&gt; by &lt;em&gt;Soledad Galli&lt;/em&gt;
+This is one of my favourite read for the Year. Although I have read it cover to cover but often time I refer to it now and then. The book is a good read, especially if you are new to the craft of Feature Engineering. Above all, I like the author’s procedures which she documented as a veritable optional package to scikit-learn concerning feature engineering.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Introduction to Data Wrangling&lt;/strong&gt; by &lt;em&gt;get author name&lt;/em&gt;
+This is one of the best technical books I have studied in a long time. This book will blow your socks off if your desire is learning to handle messy data with python. It contains a ton of tricks and gems on data handling.&lt;/p&gt;
+
+&lt;h3 id=&quot;non-technical-books&quot;&gt;Non-Technical Books&lt;/h3&gt;
+&lt;p&gt;You may be wondering after all the time on projects and technical books, how do I have time for ‘leisure reading’? You are probably right, my plate was quite full, but the drive to kill boredom and avoid my ‘mind turning into devils workshop’ turned me into a voracious reader.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Supper Thinking, The Big Book of Mental Models&lt;/strong&gt; by &lt;em&gt;Gabriel Weinberg&lt;/em&gt;
+This book is a classic. I have the ebook and audio versions. I actually was amongst the first few that purchased it when it came out. I bought it because I read a blog post done by the same author and was totally sold! I read it with so much intensity that I made out over 50 A4 size pages of notes and mind maps. It is a book that will turn you into a walking problem solver. After reading this book, I can say comfortably that the tendency to make an error judgement call on policies and issues, in general, has reduced to bearest minimum.&lt;/p&gt;
+
+&lt;h2 id=&quot;technical-blog&quot;&gt;Technical Blog&lt;/h2&gt;
+&lt;p&gt;This is one of the scariest things I did in the Year. Scarest because I faced my fears and demons. I read somewhere that one doesn’t truly know something until he teaches that thing to someone else. I started this blog as a way to document my thoughts processes as I learn the art and craft of Data Science and transition from Trade Analyst to a Data Scientist.
+I have always wanted to set up a blog, but the numerous hoops and obstacles a newbie was expected to jump and walk-around discouraged me. However, I overcame this hurdle when I encountered Mr Jeremy, one of the founders of fast ai platform. Jeremy and his fantastic team put together a fast pages project which magically turned normal jupyter notebook and medium file into a blog post with all the trappings of a normal website. This discovery was a big relief because all I needed was a code editor to write my medium files-just like this post, which I’m writing with atom’s editor or a jupyter notebook and a GitHub account. I push the files to GitHub, and voila I get back a beautiful laid out blog post!!&lt;/p&gt;
+
+&lt;h2 id=&quot;volunteerism&quot;&gt;Volunteerism&lt;/h2&gt;
+&lt;p&gt;This is one area that I foresee myself doing more in the coming year. Volunteerism is all about using my acquired skills to solve problems in the non-for-profit space and other data science-related organizations. I contributed my quota as a volunteer worker in this years DATA NATIVE CONFERENCE. Data Native is a media platform which showcases individuals and organizations doing something worthwhile in the data science space. I had a lot of fun, and I meet a lot of smart people in the field of Data Science and Data Engineering. I particularly learned the logistics and planning that goes into putting together a world-class Data Science Conference. I look forward to next years conference even though this year’s conference was virtual.&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;I hope I did not bore you with my shameless ‘self-gratifying’ stories of my struggles in the year of the coronavirus. I have read books built data science projects started my AWS certification journey, volunteered and applied my skill to solve real-life problems and started a blog post where I share with you my learning journey and wow moments. I hope you have learned something today.
+Bye!!&lt;/p&gt;</content><author><name></name></author><category term="markdown" /><summary type="html"></summary></entry><entry><title type="html">Data Preprocessing:Pandas Vs Scikit-Learn</title><link href="https://ajakaiye33.github.io/DataMusings/markdown/2020/12/14/prepro-with-sklearn.html" rel="alternate" type="text/html" title="Data Preprocessing:Pandas Vs Scikit-Learn" /><published>2020-12-14T00:00:00-06:00</published><updated>2020-12-14T00:00:00-06:00</updated><id>https://ajakaiye33.github.io/DataMusings/markdown/2020/12/14/prepro-with-sklearn</id><content type="html" xml:base="https://ajakaiye33.github.io/DataMusings/markdown/2020/12/14/prepro-with-sklearn.html">&lt;p&gt;&lt;img src=&quot;/images/pipeline.jpg&quot; alt=&quot;&quot; title=&quot;Data Pipeline&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
 
@@ -4341,117 +4412,4 @@ However, the entire Data steps can be subsumed under data exploration, as noted 
 
 &lt;h3 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h3&gt;
 &lt;p&gt;The field of data science is a growing field of study and career. Because of this dynamism, processes and procedures changes by the speed of light, and the best attitude is to have an open mind and  be ready to learn to unlearn and re-learn. And talking about education, I hope you have learned something, however small from this post.
-Bye!&lt;/p&gt;</content><author><name></name></author><category term="markdown" /><summary type="html"></summary></entry><entry><title type="html">Wrangling Data With Pythons Generative Expressions</title><link href="https://ajakaiye33.github.io/DataMusings/markdown/2020/10/05/Gen_expression.html" rel="alternate" type="text/html" title="Wrangling Data With Pythons Generative Expressions" /><published>2020-10-05T00:00:00-05:00</published><updated>2020-10-05T00:00:00-05:00</updated><id>https://ajakaiye33.github.io/DataMusings/markdown/2020/10/05/Gen_expression</id><content type="html" xml:base="https://ajakaiye33.github.io/DataMusings/markdown/2020/10/05/Gen_expression.html">&lt;p&gt;&lt;img src=&quot;/images/clean_data.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
-&lt;p&gt;In recent times we have heard it in different quarters that &lt;em&gt;data is the new oil&lt;/em&gt;
-You will agree that this is a lofty designation that would elicit if anything
-some eye-rolling episodes :smirk:&lt;/p&gt;
-
-&lt;p&gt;However I must point out as an aspiring Data Scientist &amp;amp; Wrangler,  I believe
-the assertion. The importance of data especially in the 21st century can not be
-overemphasize. Nevertheless, if you aren’t convinced just yet, I suggest you read
-&lt;strong&gt;Yuval Noah Harari&lt;/strong&gt;’s &lt;em&gt;Homo Deus&lt;/em&gt; :closed_book:&lt;/p&gt;
-
-&lt;p&gt;To continue with the above analogy, it’s evident that oil goes through various
-processes and transformation before it’s certified useful in the multiple ways that
-we currently oil.&lt;/p&gt;
-
-&lt;p&gt;Similarly, Data is basically
-useless in its crude form until it is transformed. The process of transforming Data
-has been dubbed as &lt;em&gt;Data Cleaning&lt;/em&gt; or &lt;em&gt;Data Scrubbing&lt;/em&gt; or &lt;em&gt;Data Wrangling&lt;/em&gt;. The python
-language has a lot of tools that make this cleaning process easy. I thought I’m
-versed in the available data wrangling tools until when I discovered &lt;strong&gt;Generative Expressions&lt;/strong&gt;
-Therefore this post will be about How  efficient and elegant is python’s Generative Expressions especially  when compared to other methods like &lt;em&gt;for loop&lt;/em&gt;, list comprehension etc.in the art and craft of Data Wrangling!&lt;/p&gt;
-
-&lt;h3 id=&quot;efficiency--effectiveness&quot;&gt;Efficiency &amp;amp; Effectiveness&lt;/h3&gt;
-&lt;p&gt;According to  Peter Drucker, the father of management, effectiveness is doing
-the right things, efficiency is doing things rightly. This definition may sound
-confusing at first, but on deeper reflection, it actually hit the nail on the head.
-You can be effective without necessarily be efficient. To demonstrate this concept.
-I will use a real-life code examples.
-Firstly, I will need to import an essential function from the sys python package.&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;# from sys import getsizeof&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;Extract odd number with for loop&lt;/p&gt;
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;odd_num_with_FL&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;100000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-      &lt;span class=&quot;n&quot;&gt;odd_num_with_FL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Extract odd number with List Comprehension&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# get odd number
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;odd_num_with_LC&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;100000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Extract odd number with generative expressions&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# get odd number using generative expressions
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;odd_num_with_GE&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;100000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;The above three different ways we extracted the odd numbers are correct and effective but are all three examples efficient?&lt;/p&gt;
-
-&lt;p&gt;One way to measure code efficiency is the number of bytes an operation occupies in the computer memory. Without further ado, we can know the size our above code occupies in our system’s memory with the aid of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;getsizeof&lt;/code&gt; function from the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sys&lt;/code&gt; package.&lt;/p&gt;
-
-&lt;p&gt;Let us see the bytes that each operation takes:&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getsizeof&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;odd_num_with_FL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;406496 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;bytes&lt;/code&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getsizeof&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;odd_num_with_LC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;406496 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;#bytes&lt;/code&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getsizeof&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;odd_num_with_GE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;120 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;#bytes&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;Wow! isn’t this amazing! Look at the difference in bytes. I understand. You aren’t alone. I was blown away when I encounter the power of the generative expression.&lt;/p&gt;
-
-&lt;p&gt;However, the magic behind this apparent efficiency lies in the concept of &lt;em&gt;lazing rendering or evaluation&lt;/em&gt; as the generative expression saves little or nothing in the memory. You don’t believe me … let us see the code.&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;odd_num_with_GE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;&amp;lt;generator object &lt;genexpr&gt; at 0x10453a840&amp;gt;&lt;/genexpr&gt;&lt;/p&gt;
-
-&lt;p&gt;Unlike the output of the above code, the other code examples would print out the actual odd numbers, you can go ahead and print them out. Knock yourself out! :smile:&lt;/p&gt;
-
-&lt;h3 id=&quot;elegance-and-simplicity&quot;&gt;Elegance and Simplicity&lt;/h3&gt;
-&lt;p&gt;Efficiency, which we have tried to illustrate in the preceding session, could also be defined in the light of simplicity. Not for nothing did Austin Freeman, said &lt;em&gt;Simplicity is the Soul of efficiency&lt;/em&gt;. Similarly, according to Leonardo Da Vinci, &lt;em&gt;Simplicity is the ultimate sophistication&lt;/em&gt; and I make bold to say you don’t understand a concept or a phenomenon until you can render it as simple as possible. The same simplicity informs the  Zen of python.&lt;/p&gt;
-
-&lt;p&gt;We don’t need to complicate the already complicated process of Data Wrangling and Data Cleaning, to this end you can not but agree that any procedure or tool seeking to reduce the observed complexity would be welcome and embraced by all and sundry. The generative expression makes life easy, even in the thick and thin of the dirtiest of data.
-Let illustrate this with the following
-code:&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# Clean the following List of words
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;words&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'Hello&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'My name'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'is&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'Bob'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'How are'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'doing&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Using the normal for loop to clean the above list of words&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;clean_words&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;word&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;words&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;w&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;word&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;' '&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;clean_words&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;w&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strip&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lower&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;clean_words&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'hello'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'my'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'name'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'is'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'bob'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'how'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'are'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'you'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'doing'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;Without the risk of sounding immodest, the above path would be the route taken by the majority of python newbies in solving this problem. This approach may be very much useful but appears ponderous. Just look at the number of lines of code written and the complex nested for loop. Can the above code be improved on with generative expression?&lt;/p&gt;
-
-&lt;p&gt;Here is the code:&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;clean_words_with_GE&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;word&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strip&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lower&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;word&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;words&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;w&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;word&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;' '&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;The same result was achieved with just a line and also little, or no memory is utilized by lazy evaluation.&lt;/p&gt;
-
-&lt;h3 id=&quot;brevity-vs-readability&quot;&gt;Brevity Vs Readability&lt;/h3&gt;
-
-&lt;p&gt;There is no doubt that the generative expression approach not only engenders efficiency, it also ensures simplicity. Like every other approach, it has its own drawbacks and limitations. And chief amongst the limitations is Readability. Our code may not pass the 7th Zen of Python’s rule, which admonished:’Readability Counts’. Therefore as you enjoy the new powers of generative expression equally ensures that your code is clear and readable.&lt;/p&gt;
-
-&lt;p&gt;I hope you enjoy this post. Till we meet again, happy coding:hammer:&lt;/p&gt;</content><author><name></name></author><category term="markdown" /><summary type="html"></summary></entry></feed>
+Bye!&lt;/p&gt;</content><author><name></name></author><category term="markdown" /><summary type="html"></summary></entry></feed>
