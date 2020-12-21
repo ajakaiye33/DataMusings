@@ -56,7 +56,7 @@ I really love the ten weeks Journey this book took me through! The author struct
 **Python Feature Engineering Cookbook** by *Soledad Galli*
 This is one of my favourite read for the Year. Although I have read it cover to cover but often time I refer to it now and then. The book is a good read, especially if you are new to the craft of Feature Engineering. Above all, I like the author's procedures which she documented as a veritable optional package to scikit-learn concerning feature engineering.
 
-**Introduction to Data Wrangling** by *get author name*
+**The Data Wrangling Workshop** by *Brian Lipp et al *
 This is one of the best technical books I have studied in a long time. This book will blow your socks off if your desire is learning to handle messy data with python. It contains a ton of tricks and gems on data handling.
 
 ### Non-Technical Books
