@@ -10,7 +10,7 @@ title: "2020:Learning Journey and Milestones"
 ![](/images/reflection.jpeg)
 
 ## Introduction
-Hey there, yes you and everyone that have taken out time to read my blog or 'blabbing page' this year, I say thank you from the bottom of my heart! There is no doubt that this year, 'the year of the corona-virus', has been quite tough and challenging. Not only was our social-economic life disrupted, a lot of people, according to the World Health Organization, -over 1.7 million people died from the complications of the covid-19 virus.
+Hey there, yes you and everyone that have taken out time to read my blog or 'blabbing page' this year, I say thank you from the bottom of my heart! There is no doubt that this year, 'the year of the corona-virus', has been quite tough and challenging. Not only was our social-economic life disrupted,according to the World Health Organization,as at the time of writing, over 1.7 million people have died from covid-19 complications.
 
 Obviously, a greater part of the year was inundated with the gloom and doom of the coronavirus, but in the midst of these dark episodes, there were occasional flashes of light, warmth and hope here and there. I had my own flashes. Hope you had yours. Today's post will be more or less a review of my struggles and achievements in the year of the coronavirus!
 
