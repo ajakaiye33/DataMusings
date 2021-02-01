@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Manipulating,Querying,Defining and Controlling RDBMS with Python | DataPonderings</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Manipulating,Querying,Defining and Controlling RDBMS with Python" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Using the Python to effect SQL Statement" />
+<meta property="og:description" content="Using the Python to effect SQL Statement" />
+<link rel="canonical" href="https://ajakaiye33.github.io/DataMusings/jupyter/2021/02/01/sql.html" />
+<meta property="og:url" content="https://ajakaiye33.github.io/DataMusings/jupyter/2021/02/01/sql.html" />
+<meta property="og:site_name" content="DataPonderings" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-02-01T00:00:00-06:00" />
+<script type="application/ld+json">
+{"description":"Using the Python to effect SQL Statement","url":"https://ajakaiye33.github.io/DataMusings/jupyter/2021/02/01/sql.html","@type":"BlogPosting","headline":"Manipulating,Querying,Defining and Controlling RDBMS with Python","dateModified":"2021-02-01T00:00:00-06:00","datePublished":"2021-02-01T00:00:00-06:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://ajakaiye33.github.io/DataMusings/jupyter/2021/02/01/sql.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/DataMusings/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://ajakaiye33.github.io/DataMusings/feed.xml" title="DataPonderings" /><link rel="shortcut icon" type="image/x-icon" href="/DataMusings/images/favicon.ico"><link href="https://cdn.jsdelivr.net/npm/@primer/css/dist/primer.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"> </script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement( document.body, {
+        delimiters: [
+            {left: "$$", right: "$$", display: true},
+            {left: "[%", right: "%]", display: true},
+            {left: "$", right: "$", display: false}
+        ]}
+        );
+    });
+    </script>
+
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/DataMusings/">DataPonderings</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/DataMusings/about/">About Me</a><a class="page-link" href="/DataMusings/search/">Search</a><a class="page-link" href="/DataMusings/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Manipulating,Querying,Defining and Controlling RDBMS with Python</h1><p class="page-description">Using the Python to effect SQL Statement</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2021-02-01T00:00:00-06:00" itemprop="datePublished">
+        Feb 1, 2021
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      5 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/DataMusings/categories/#jupyter">jupyter</a>
+        
+      
+      </p>
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/ajakaiye33/DataMusings/tree/master/_notebooks/2021-02-01-sql.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/DataMusings/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/ajakaiye33/DataMusings/master?filepath=_notebooks%2F2021-02-01-sql.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/DataMusings/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/ajakaiye33/DataMusings/blob/master/_notebooks/2021-02-01-sql.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/DataMusings/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2021-02-01-sql.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Introduction">Introduction<a class="anchor-link" href="#Introduction"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>I have heard, read, and even admonished that ones training is incomplete without the mastery of SQL(sequel), the ubiquitous database language as a burgeoning data scientist. As much as I share the veracity of the ubiquitousness of SQL and the need to master it, I have equally had my share of frustration and "obstacles" in my attempt at understanding this language.</p>
+<p>I suspect you would be curious to know the frustration I'm talking about. In my opinion, the most prominent is the environment, yes, setting up the environment for learning, practising and writing SQL statements. From the last time I checked, you must go through the maze of downloading and installing a database engine, and for your information, you must equally consider the type of database as there are several.</p>
+<p>I have encountered the ORACLE database, SQLite, MySQL, MS SQL server as I learn SQL and database in general. However, the most interesting thing is that these databases can be fairly manipulated controlled and queried with just a single language: SQL.Howbeit with slight variation depending on the type of database. Thus learning and mastering the SQL language can not be overemphasized.</p>
+<p>Therefore my joy and excitement knew no bounds when I recently discovered that I could write SQL statements to control, manipulate, define and query a database with my python language! Of course, this discovery drastically changed my perception of learning SQL. It became an experience I enjoyed rather than endured. Thus, this post summarises how python can write SQL statements and control databases, especially the SQLite database.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="RDBMS-and-SQL">RDBMS and SQL<a class="anchor-link" href="#RDBMS-and-SQL"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Relation Database Management System-RDBMS is a software use to manage data on physical hard disk built based on Codd's relational model. Its structure in three forms:</p>
+<ul>
+<li>Storage Engine</li>
+<li>Query Engine</li>
+<li>Log Management</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Structure-of-RDBMS">Structure of RDBMS<a class="anchor-link" href="#Structure-of-RDBMS"> </a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Storage-engine">Storage engine<a class="anchor-link" href="#Storage-engine"> </a></h4><p>Is that part of the RDBMS responsible for storing data and retrieving data in an efficient way.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Query-engine">Query engine<a class="anchor-link" href="#Query-engine"> </a></h4><p>This is that part of RDBMS responsible for creating, manipulating and querying data objects. Some functions carried out under here are:</p>
+<ul>
+<li>create and delete columns</li>
+<li>create ,delete, update rows e.t.c</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Log-management">Log management<a class="anchor-link" href="#Log-management"> </a></h4><p>This part creates and maintain the logs</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="SQL">SQL<a class="anchor-link" href="#SQL"> </a></h2><p>Is a domain-specific language originally designed based on E.F. Codd's relational model which is widely used in today's databases to define,insert,manipulate and retrieve data from them.
+It can be sub-divided as follows:</p>
+<ul>
+<li>Data Definition Language(DDL)</li>
+<li>Data Manipulation Language(DML)</li>
+<li>Data Query Language(DQL)</li>
+<li>Data Control Language(DCL)</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="DDL">DDL<a class="anchor-link" href="#DDL"> </a></h3><p>This is where we define our data structure in SQL. Some DDL statements are:</p>
+<ul>
+<li>CREATE TABLE</li>
+<li>DROP TABLE</li>
+<li>ALTER TABLE</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="DML">DML<a class="anchor-link" href="#DML"> </a></h3><p>This the part of SQL that enable us to insert, delete or update a certain data point(a row) in a previously defined data object(a table)
+It has statements like:</p>
+<ul>
+<li>INSERT INTO</li>
+<li>DELETE FROM</li>
+<li>UPDATE</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="DQL">DQL<a class="anchor-link" href="#DQL"> </a></h3><p>This part of SQL enable us to query the data created with DDL ,inserted using DML.
+Under here we also encounter some terms like foreign keys, primary key, index joins e.t.c
+Its common statement is:</p>
+<ul>
+<li>SELECT</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Relationships-in-RDBMS">Relationships in RDBMS<a class="anchor-link" href="#Relationships-in-RDBMS"> </a></h2><p>There are one or more columns in a table that will have unique values for each row. This is called <code>primary key</code>. However  a primary key of a table can be referenced in another table to create a relationship.This columns of reference is called foreign key.
+Relationship can be:</p>
+<ul>
+<li>1:1 each row of the second table is uniquely related to one row of the first table</li>
+<li>1:N</li>
+<li>1:M</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Using-RDBMS--MySQL/PostgreSQL/SQLite">Using RDBMS- MySQL/PostgreSQL/SQLite<a class="anchor-link" href="#Using-RDBMS--MySQL/PostgreSQL/SQLite"> </a></h2><ul>
+<li>write some SQL statements</li>
+<li>Connect to SQLite Database with python</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Ex-8.01-Connecting-to-a-Database-in-SQLite">Ex 8.01 Connecting to a Database in SQLite<a class="anchor-link" href="#Ex-8.01-Connecting-to-a-Database-in-SQLite"> </a></h3>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">sqlite3</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;./lesson.db&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">with</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;./lesson.db&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">conn</span><span class="p">:</span>
+    <span class="k">pass</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Ex-8.02-Using-DDL-and-DML-Commands-in-SQLite">Ex 8.02 Using DDL and DML Commands in SQLite<a class="anchor-link" href="#Ex-8.02-Using-DDL-and-DML-Commands-in-SQLite"> </a></h3>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;CREATE TABLE IF NOT EXISTS user(email text, first_name text, last_name text, address text,</span><span class="se">\</span>
+<span class="s2">age integer,PRIMARY KEY(email))&quot;</span><span class="p">)</span>
+
+
+<span class="c1">#insert rows into the database:</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;INSERT INTO user VALUES (&#39;bob@example.com&#39;,&#39;Bob&#39;, &#39;Codd&#39;,&#39;123 Fantansy Lane, Fantasy City&#39;,31)&quot;</span><span class="p">)</span>
+
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;INSERT INTO user VALUES (&#39;tom@web.com&#39;,&#39;Tom&#39;,&#39;Fake&#39;,&#39;456 Fantasy Lane, Fantasy City&#39;,39)&quot;</span><span class="p">)</span>
+
+<span class="c1">#read data from database</span>
+<span class="n">rows</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;SELECT * FROM user&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>(&#39;bob@example.com&#39;, &#39;Bob&#39;, &#39;Codd&#39;, &#39;123 Fantansy Lane, Fantasy City&#39;, 31)
+(&#39;tom@web.com&#39;, &#39;Tom&#39;, &#39;Fake&#39;, &#39;456 Fantasy Lane, Fantasy City&#39;, 39)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Reading-Data-from-a-Database-in-SQLite">Reading Data from a Database in SQLite<a class="anchor-link" href="#Reading-Data-from-a-Database-in-SQLite"> </a></h3><ul>
+<li><code>SELECT</code> statement is powerful and useful here</li>
+<li><code>SELECT *</code> this literally tells the engine to select all columns</li>
+<li><code>LIMIT</code> This is use to limit the number of rows to be displayed - (SELECT * FROM  <tablename> LIMIT 50;)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#     cursor = conn.cursor()</span>
+<span class="c1">#     rows = cursor.execute(&#39;SELECT * FROM user&#39;)</span>
+<span class="c1">#     for row in rows:</span>
+<span class="c1">#         print(row)</span>
+
+<span class="n">rows</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;SELECT * FROM user&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>(&#39;bob@example.com&#39;, &#39;Bob&#39;, &#39;Codd&#39;, &#39;123 Fantansy Lane, Fantasy City&#39;, 31)
+(&#39;tom@web.com&#39;, &#39;Tom&#39;, &#39;Fake&#39;, &#39;456 Fantasy Lane, Fantasy City&#39;, 39)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Ex-8.03-Sorting-Values-That-Are-Present-in-the-Database">Ex 8.03 Sorting Values That Are Present in the Database<a class="anchor-link" href="#Ex-8.03-Sorting-Values-That-Are-Present-in-the-Database"> </a></h3><ul>
+<li>Using <code>ORFER BY</code> Statement</li>
+</ul>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">rows</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM user ORDER BY age DESC&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>(&#39;tom@web.com&#39;, &#39;Tom&#39;, &#39;Fake&#39;, &#39;456 Fantasy Lane, Fantasy City&#39;, 39)
+(&#39;bob@example.com&#39;, &#39;Bob&#39;, &#39;Codd&#39;, &#39;123 Fantansy Lane, Fantasy City&#39;, 31)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">rows_asc</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM user ORDER BY age&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">rows_asc</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+    
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>(&#39;bob@example.com&#39;, &#39;Bob&#39;, &#39;Codd&#39;, &#39;123 Fantansy Lane, Fantasy City&#39;, 31)
+(&#39;tom@web.com&#39;, &#39;Tom&#39;, &#39;Fake&#39;, &#39;456 Fantasy Lane, Fantasy City&#39;, 39)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="The-ALTER-Command">The ALTER Command<a class="anchor-link" href="#The-ALTER-Command"> </a></h2><ul>
+<li><p>Use to add new columns to an already existing table</p>
+</li>
+<li><p>However <code>UPDATE</code> on the other hand is used to update the value of one or more columns in one or several rows of database</p>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Ex-8.04-Altering-the-Structure-of-a-table-and-Updating-the-New-Fields">Ex 8.04 Altering the Structure of a table and Updating the New Fields<a class="anchor-link" href="#Ex-8.04-Altering-the-Structure-of-a-table-and-Updating-the-New-Fields"> </a></h3>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;ALTER TABLE user ADD COLUMN gender text&quot;</span><span class="p">)</span>
+<span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;UPDATE user SET gender=&#39;M&#39;&quot;</span><span class="p">)</span>
+<span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">row_alter</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM user ORDER BY age&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">row_alter</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>(&#39;bob@example.com&#39;, &#39;Bob&#39;, &#39;Codd&#39;, &#39;123 Fantansy Lane, Fantasy City&#39;, 31, &#39;M&#39;)
+(&#39;tom@web.com&#39;, &#39;Tom&#39;, &#39;Fake&#39;, &#39;456 Fantasy Lane, Fantasy City&#39;, 39, &#39;M&#39;)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="GROUP-BY-Clause">GROUP BY Clause<a class="anchor-link" href="#GROUP-BY-Clause"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Ex-8.05-Grouping-Values-in-Tables">Ex 8.05 Grouping Values in Tables<a class="anchor-link" href="#Ex-8.05-Grouping-Values-in-Tables"> </a></h3>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">with</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;./lesson.db&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">conn</span><span class="p">:</span>
+    <span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+<span class="c1"># add a female user into the table</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;INSERT INTO user VALUES(&#39;shelly@www.com&#39;,&#39;Shelly&#39;,&#39;Milar&#39;,&#39;123, Ocean View Lane&#39;,</span><span class="se">\</span>
+<span class="s2">39,&#39;F&#39;)&quot;</span><span class="p">)</span>
+<span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+<span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+<span class="n">rows</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM user ORDER BY age DESC&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>(&#39;tom@web.com&#39;, &#39;Tom&#39;, &#39;Fake&#39;, &#39;456 Fantasy Lane, Fantasy City&#39;, 39, &#39;M&#39;)
+(&#39;shelly@www.com&#39;, &#39;Shelly&#39;, &#39;Milar&#39;, &#39;123, Ocean View Lane&#39;, 39, &#39;F&#39;)
+(&#39;bob@example.com&#39;, &#39;Bob&#39;, &#39;Codd&#39;, &#39;123 Fantansy Lane, Fantasy City&#39;, 31, &#39;M&#39;)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+&lt;/div&gt;
+ 
+
+</tablename></li></ul></div></div></div></div>
+
+
+  </div><a class="u-url" href="/DataMusings/jupyter/2021/02/01/sql.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/DataMusings/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/DataMusings/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/DataMusings/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>Data gymnastics... Enter Zen from there!.</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://twitter.com/ajakzheddy" title="ajakzheddy"><svg class="svg-icon grey"><use xlink:href="/DataMusings/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
