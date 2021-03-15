@@ -35,7 +35,7 @@ Data extraction is one of the typical data engineering tasks. As the name implie
 Collect data from different sources, e.g. databases.
 Third-party data providers via API.
 Scrap data from the web, e.t.c.
-These difference sources are critical to data enrichment. Real-world data don't always come in CSV flat files; instead, they come in different data silos. It is the data engineer's job to extract them into a single form necessary for the subsequent analysis process.
+These difference sources are critical to data enrichment. Real-world data don't always come in CSV flat files; instead, they come in different data silos. The data engineer's job is to extract them into a single form necessary for the subsequent analysis process.
 
 #### Transformation and Loading
  Data cleaning is an aspect of data transformation. According to a Forbes survey, data scientists spend about 80% of their time doing data cleaning. Thus, data scientist, therefore, carries out some data transformation; however, data transformation from the data engineering perspective typically involves building a pipeline that automates and perpetually updates the processes of extraction, transformation, and loading.
