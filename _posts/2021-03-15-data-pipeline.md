@@ -5,8 +5,11 @@ description: Why Data Scientist Should Acquire Data Engineering Skills.
 categories: [markdown]
 title: "Building Models Vs Building Data Pipelines"
 ---
-![](/images/circle.png)
 
+
+
+
+![](/images/circle.png)
 ### Introduction
 I have always been a firm proponent of the Oracle of Delphi philosophy, which in essence
 admonished humanity thus: 'Know Thyself, For an unexamined Life is not worth living. Between my last post and now, quite a lot has happened, which essentially have allowed me a critical look at my trajectory in the world of Data Science.
