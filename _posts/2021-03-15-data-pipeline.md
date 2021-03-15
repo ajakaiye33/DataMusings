@@ -7,11 +7,10 @@ title: "Building Models Vs Building Data Pipelines"
 ---
 
 
-
-### Introduction
 ![](/images/circle.png)
 *source*: Lewis Gavin's What is Data Engineering Report.
 
+### Introduction
 I have always been a firm proponent of the Oracle of Delphi philosophy, which in essence
 admonished humanity thus: 'Know Thyself, For an unexamined Life is not worth living. Between my last post and now, quite a lot has happened, which essentially have allowed me a critical look at my trajectory in the world of Data Science.
 Without boring you with the details of these experience, I recently had the opportunity to apply for a data science role in one of the prominent non-profit organization Data organization doing excellent work in the areas of Data Democratization, i.e. making the power of data available to all and sundry irrespective of the level of skills and knowledge.
