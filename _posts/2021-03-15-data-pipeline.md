@@ -146,6 +146,7 @@ s3.upload_file(local_filename, bucket_name, s3_file)
 The above lines of code would extract all the columns in the customer's table,
 save them unto a CSV file format to aid subsequent uploads to the final destination, the Amazon S3 cloud storage facility.
 
-Conclusion
+### Conclusion
+
 Data engineering activities share a lot of similarities with data Science activities. And we can say that they complement each other. However, Data engineering over the years has eaten into the job market share of data science as they have become the darlings of start-up firms who, for an apparent reason, would instead employ a data engineer than a sole data scientists. Another reason why data engineering is gaining more grounds than data science could be due to the advent of AutoML. Consequently, I would strongly encourage anyone to acquire data engineering skills, especially practising data scientist or data science enthusiasts. I hope you learn something from today's post.
 Bye!
