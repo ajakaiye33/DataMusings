@@ -74,7 +74,7 @@ These difference sources are critical to data enrichment. Real-world data don't 
 
 ### ETL in Action
 
-To give us a taste of what the data engineer does in terms of typical code, I decided to share a project I recently world on.
+To give us a taste of what the data engineer does in terms of typical code, I decided to share a project I worked on recently.
 We would display how to typically extract data from a relational database and load same to Amazon s3
 ```Python
 #import necessary package and libraries
